@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Form</title>
+</head>
+
+<body>
+    <h1>REGISTRATION FORM</h1>
+    <form>
+        <fieldset>
+            <legend>
+                <h3>PERSONAL DETAILS</h3>
+            </legend>
+
+            <br>
+
+            <label for="name">Full Name:</label><br>
+            <input type="text" name="name" id="name" placeholder="Enter Your Name">
+
+            <br><br>
+
+            <label for="email">Email:</label><br>
+            <input type="email" id="email" placeholder="Enter your email">
+
+            <br><br>
+
+            <label for="password">Password:</label><br>
+            <input type="password" id="password" placeholder="Enter the password">
+
+            <br><br>
+
+            <label for="dob">Date of Birth:</label><br>
+            <input type="date" id="dob">
+
+            <br><br><br><br>
+
+        </fieldset>
+
+        <br>
+
+        <fieldset>
+
+            <legend>
+                <h3>OTHER DETAILS</h3>
+            </legend><br>
+
+            <label>Your Gender:</label><br>
+
+            <input type="radio" id="male" name="gender">
+            <label for="male">Male</label>
+
+            <input type="radio" id="female" name="gender">
+            <label for="female">Female</label>
+
+            <input type="radio" id="other" name="gender">
+            <label for="other">Prefer not to say</label>
+
+            <br><br>
+
+            <label>Skills:</label><br>
+
+            <input type="checkbox" id="html">
+            <label for="html">HTML</label>
+
+            <input type="checkbox" id="css">
+            <label for="css">CSS</label>
+
+            <input type="checkbox" id="python">
+            <label for="python">Python</label>
+
+            <input type="checkbox" id="C++">
+            <label for="C++">C++</label>
+
+            <br><br>
+
+            <label for="branch">Branch:</label><br>
+
+            <select id="branch">
+
+                <option>Select Branch</option>
+
+                <option>CSE</option>
+
+                <option>ISE</option>
+
+                <option>AIML</option>
+
+                <option>M&C</option>
+
+                <option>ECE</option>
+
+                <option>EEE</option>
+
+                <option>ASE</option>
+
+                <option>ME</option>
+
+                <option>AME</option>
+
+                <option>RE</option>
+
+
+
+            </select>
+
+            <br><br><br>
+
+            <label for="resume">Upload Resume:</label><br>
+            <input type="file" id="resume">
+
+            <br><br><br>
+
+            <label for="about">About Yourself</label><br>
+            <textarea id="about" rows="5" cols="100" placeholder="Tell us about yourself"></textarea>
+
+        </fieldset>
+        <br><br>
+
+        <fieldset>
+            <br>
+            <label for="submit">Do you wanna Submit the form?</label>
+            <input type="submit" value="Register">
+
+            <br><br>
+            <label for="Clear">Clear all the data </label>
+            <input type="reset" value="Clear">
+
+        </fieldset>
+
+        <br>
+    </form>
+
+</body>
+
+</html>
