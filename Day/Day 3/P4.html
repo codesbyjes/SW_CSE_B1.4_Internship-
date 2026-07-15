@@ -3,9 +3,73 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>video tag</title>
 </head>
 <body>
+    <h1> video tag</h1>
+
+    
+
+    <p> this is mp4</p>
+    <video src = "sample-5s-360p.mp4" controls>
+        browser doesnt support video
+    </video>
+
+    <br>
+    <p> this is webM</p>
+
+    <video src = "sample-5s-360p.webm" controls>
+        browser doesnt support video
+    </video>
+
+    <h3> width and height<h3>
+
+    <video src = "sample-5s-360p.mp4" width = "320" geight = "320"
+    controls>
+        your browser doesnt support 
+    </video>
+
+    <h3> autoplay <h3>
+
+    <p> it plays itself<p>
+
+        <video src = "sample-5s-360p.mp4" width = "320" geight = "320"
+    autoplay controls>
+        your browser doesnt support 
+    </video>
+
+    <h3> autoplay wid muted<h3>
+
+        <video src = "sample-5s-360p.mp4" width = "320" geight = "320"
+    autoplay muted controls>
+        your browser doesnt support 
+    </video>
+
+    <h3>loop autoplay <h3>
+
+    <video src = "sample-5s-360p.mp4" width = "320" geight = "320"
+    loop autoplay controls>
+        your browser doesnt support 
+    </video>
+
+    <h3>cover page <h3>
+        <video src = "sample-5s-360p.mp4" width = "320" geight = "320"
+    poster="" autoplay controls>
+        your browser doesnt support 
+    </video>
+
+    <h3>Loading controls<h3>
+        <p> if none , doesnt load until user clicks</p>
+        <p> if metadata, loads only duraction nd dimension data but not the vid yet</p>
+        <p> if auto load vid immediately </p>
+        <video src = "sample-5s-360p.mp4" width = "320" geight = "320"
+    poster="" preload = "none" autoplay controls>
+        your browser doesnt support 
+    </video>
+
+
+
+    
     
 </body>
 </html>
