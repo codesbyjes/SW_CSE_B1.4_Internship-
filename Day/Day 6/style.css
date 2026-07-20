@@ -1,0 +1,307 @@
+/* ==========================
+   Universal Reset
+========================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* ==========================
+   CSS Variables
+========================== */
+:root {
+    --bg-color: #e8f7ff;
+    --primary: #0d47a1;
+    --secondary: #1976d2;
+    --accent: #ffb300;
+    --text: #222;
+    --white: #ffffff;
+    --font: Arial, Helvetica, sans-serif;
+}
+
+/* ==========================
+   Body
+========================== */
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text);
+    font-family: var(--font);
+    line-height: 1.6;
+    padding: 20px;
+}
+
+/* ==========================
+   Header (the big site banner at the top)
+========================== */
+
+header {
+    background-color: var(--primary);
+    color: white;
+    padding: 20px;
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+header p {
+    margin-top: 10px;
+}
+
+/* IMPROVEMENT: made your name stand out a bit more using only text
+   properties you already know. letter-spacing adds a small gap between
+   letters, and text-transform makes everything capitals - together they
+   give the h1 a "title" feel. */
+header h1 {
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-family:'Times New Roman', Times, serif;
+    
+}
+
+blockquote {
+    margin-top: 15px;
+    font-style: italic;
+    letter-spacing: 1px;
+}
+
+/* ==========================
+   Navigation
+========================== */
+
+nav ul {
+    list-style: none;
+    margin-top: 20px;
+}
+
+nav ul li {
+    display: inline-block;
+    margin: 8px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: white;
+    background-color: var(--secondary);
+    padding: 10px 18px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+/* NOTE FOR YOU: this rule was already in your original file before I
+   touched anything. It uses a "pseudo-class" (:hover), which is NOT on
+   your list of learned concepts yet. I left it exactly as-is (removing
+   it would change how your nav behaves), but flag it to your instructor
+   since it wasn't part of what you were taught. */
+nav ul li a:hover {
+    background-color: var(--accent);
+    color: black;
+}
+
+/* ==========================
+   Sections
+========================== */
+
+section {
+    background-color: rgb(199, 230, 240);
+    padding: 25px;
+    margin-bottom: 25px;
+    border: 2px solid rgb(120, 73, 12);
+}
+
+/* ==========================
+   Headings
+========================== */
+
+h1 {
+    margin-bottom: 10px;
+}
+
+h2 {
+    color: var(--primary);
+    margin-bottom: 15px;
+    font-family: cursive;
+    font-size: x-large;
+    letter-spacing: 1px;
+}
+
+h3 {
+    color: var(--secondary);
+    margin-bottom: 10px;
+}
+
+/* ==========================
+   Project titles (h4.project)
+========================== */
+
+.project {
+    background-color: var(--secondary);
+    color: white;
+    padding: 10px;
+    text-align: center;
+    letter-spacing: 1px;
+}
+
+
+#projects header {
+    background-color: transparent;
+    color: var(--text);
+    padding: 0;
+    margin-bottom: 10px;
+    text-align: left;
+}
+
+/* ==========================
+   Project cards
+========================== */
+
+#projects article {
+    background-color: var(--white);
+    border: 2px solid var(--secondary);
+    padding: 15px;
+    margin-bottom: 20px;
+}
+
+/* ==========================
+   Paragraphs & Lists
+========================== */
+
+p {
+    margin-bottom: 12px;
+}
+
+ul,
+ol {
+    margin-left: 25px;
+    margin-bottom: 15px;
+}
+
+/* ==========================
+   Images
+========================== */
+#mypic {
+    
+    display: block;
+    
+    background-color: rgb(232, 240, 247);
+
+}
+
+
+
+img {
+    display: block;
+    margin: 15px auto;
+    border: 3px solid black;
+}
+
+
+video {
+    display: block;
+    margin: 15px auto;
+    border: 3px solid black;
+}
+
+
+iframe {
+    display: block;
+    margin: 15px auto;
+    border: 3px solid black;
+}
+
+/* ==========================
+   Tables
+========================== */
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+    border-width: 8px;
+}
+
+th,
+td {
+    padding: 10px;
+    text-align: center;
+    border: 2px solid var(--secondary);
+}
+
+/* IMPROVEMENT: gave the header row its own colour so it is instantly
+   easy to tell apart from the data rows underneath it. */
+thead {
+    background-color: var(--primary);
+    color: white;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+tfoot th {
+    background-color: var(--bg-color);
+    color: var(--primary);
+}
+
+caption {
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+/* ==========================
+   Contact Form
+========================== */
+
+fieldset {
+    padding: 20px;
+    border: 2px solid var(--secondary);
+}
+
+legend {
+    color: var(--primary);
+    padding: 0 10px;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+label {
+    color: var(--primary);
+}
+
+input,
+textarea {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 15px;
+    border: 1px solid var(--secondary);
+}
+
+button {
+    padding: 10px 18px;
+    background-color: var(--primary);
+    color: white;
+    border: none;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+/* ==========================
+   Footer
+========================== */
+
+footer {
+    text-align: center;
+    margin-top: 30px;
+    padding: 20px;
+    background-color: var(--primary);
+    color: white;
+}
+
+footer a {
+    color: var(--accent);
+}
+
+figcaption {
+    text-align: center;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-size: larger;
+    letter-spacing: 1px;
+}
