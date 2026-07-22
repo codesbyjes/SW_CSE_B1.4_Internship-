@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<style>
+
+.container{
+
+display:grid;
+
+grid-template-columns:1fr 2fr 1fr;
+
+grid-template-rows:80px 200px 80px;
+
+grid-template-areas:
+
+"header header header"
+
+"menu content ads"
+
+"footer footer footer";
+
+gap:10px;
+
+}
+
+.header{
+grid-area:header;
+background:orange;
+}
+
+.menu{
+grid-area:menu;
+background:lightblue;
+}
+
+.content{
+grid-area:content;
+background:lightgreen;
+}
+
+.ads{
+grid-area:ads;
+background:pink;
+}
+
+.footer{
+grid-area:footer;
+background:yellow;
+}
+
+.container div{
+
+padding:20px;
+
+text-align:center;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<div class="header">Header</div>
+
+<div class="menu">Menu</div>
+
+<div class="content">Content</div>
+
+<div class="ads">Ads</div>
+
+<div class="footer">Footer</div>
+
+</div>
+
+</body>
+
+</html>
