@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS Functions 2</title>
+</head>
+<body>
+    <h2>JS Functions 2</h2>
+    <script>
+        // Higher Order Functions (HOC)
+        function runTwice(fn){
+            fn();
+            fn();
+        }
+        runTwice(function(){
+            console.log("This runs twice");
+        });
+
+        // Callback function
+        function handleData(data,callback){
+            const processed = data.toUpperCase();
+            callback(processed);
+        }
+        handleData("hello",function(result){
+            console.log("Callback result:", result);
+        });
+
+        // Array methods: map, filter, forEach *****
+        const numbers = [1,2,3,4,5];
+
+        const doubled = numbers.map((n)=> n*2);
+        console.log("doubled: ",doubled);
+
+        const evens = numbers.filter((n)=> n%2===0);
+        console.log("evens: ",evens);
+
+        numbers.forEach((n,index)=>{
+            console.log("Index:",index, "Value:", n);
+        });
+
+        // Function returning a function
+        function createAdder(base){
+            return function(x){
+                return base + x;
+            }
+        }
+
+        const addTen = createAdder(10);
+        console.log("addTen(5):",addTen(5));
+    </script>
+</body>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>JavaScript Operators Example</title>
+</head>
+<body>
+  <h2>JavaScript Operators Example</h2>
+  <p>Check the console to see the output.</p>
+
+  <script>
+    // Price and quantity
+    let price = 500;
+    let quantity = 3;
+
+    // Arithmetic operators
+    let total = price * quantity;        // multiplication
+    let discount = total * 0.1;          // 10% discount
+    let finalAmount = total - discount;  // subtraction
+
+    // Assignment operators
+    let balance = 2000;
+    balance -= finalAmount;              // same as balance = balance - finalAmount
+
+    // Comparison operators
+    let isAffordable = balance >= 0;     // check if balance is enough
+    let hasDiscount = discount > 0;      // check if discount exists
+
+    // Logical operators
+    let canBuy = isAffordable && hasDiscount; // both must be true
+
+    // Ternary operator
+    let message = canBuy ? "You can buy this item." : "You cannot buy this item.";
+
+    // String operator
+    let summary = "Total: " + total + ", Discount: " + discount + ", Final: " + finalAmount;
+
+    // Type operator
+    let typeOfPrice = typeof price;
+
+    // Nullish coalescing operator
+    let couponCode = null;
+    let appliedCoupon = couponCode ?? "NO_COUPON"; // use default if null or undefined
+
+    // Optional chaining (example with object)
+    let user = {
+      profile: {
+        name: "Asha"
+      }
+    };
+    let userName = user?.profile?.name ?? "Guest";
+
+    // Output results
+    console.log("Summary:", summary);
+    console.log("Message:", message);
+    console.log("Balance left:", balance);
+    console.log("Can buy?", canBuy);
+    console.log("Type of price:", typeOfPrice);
+    console.log("Applied coupon:", appliedCoupon);
+    console.log("User name:", userName);
+  </script>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS Functions 3</title>
+</head>
+
+<body>
+    <h2>JS Functions 3</h2>
+    <button id="incBtn">Increment</button>
+    <button id="resetBtn">Reset</button>
+    <p id="countDisplay">Count: 0</p>
+
+    <script>
+
+        const counter = {
+            count:0,
+            increment() {
+                this.count++;
+                this.render();
+            },
+            reset() {
+                this.count = 0;
+                this.render();
+            },
+            render(){
+                document.getElementById("countDisplay").textContent = "Count: "+this.count;
+            }
+        };
+
+        // Event handler
+        document.getElementById("incBtn").addEventListener
+        ("click",function()
+        {
+            counter.increment();
+        }
+    );
+
+        document.getElementById("resetBtn").addEventListener
+        ("click",function()
+        {
+            counter.reset();
+        }
+    );
+
+        counter.render();
+
+    </script>
+</body>
+
+</html>

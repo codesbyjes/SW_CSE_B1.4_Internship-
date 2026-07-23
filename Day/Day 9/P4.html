@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS Functions</title>
+</head>
+
+<body>
+    <h2>JS Functions</h2>
+    <div class="hey" id = "hey">-</div>
+    <script>
+        // Function Declaration
+        function add(a, b) {
+            return a + b;
+        }
+        //Function expression
+        const multiply = function (a, b) {
+            return a * b;
+        }
+        //Arrow function
+        const greet = (name) => {
+            return "Hello, " + name;
+        }
+        // Arrow function with implicit return
+        const square = (n) => n * n;
+
+        // Default parameters
+        function welcome(name = "Guest") {
+            return "Welcome," + name;
+        }
+
+        console.log("function add(20,30)", add(20, 30));
+        console.log("multiply(20,30)", multiply(20, 30));
+        console.log("greet('Asha')", greet("Asha"));
+        console.log("square(9)", square(9));
+        console.log("welcome('Rakesh')", welcome('Rakesh'));
+        console.log("welcome()", welcome());
+
+        document.getElementById("hey").textContent = 
+        "Hello, lets learn about functions in javascript, open the console for more info";
+    </script>
+</body>
+
+</html>

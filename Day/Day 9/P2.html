@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Strings & Template Literals Example</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background: #f5f5f5;
+        }
+
+        .card {
+            background: #fff;
+            max-width: 600px;
+            margin: auto;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            margin-top: 0;
+        }
+
+        .section {
+            margin-top: 15px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            background: #fafafa;
+        }
+
+        .label {
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        .value {
+            color: #333;
+            white-space: pre-wrap;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="card">
+        <h2>Invoice Generator</h2>
+
+        <div class="section">
+            <div class="label">Customer Details:</div>
+            <div class="value" id="customerDetails"></div>
+        </div>
+
+        <div class="section">
+            <div class="label">Invoice Header:</div>
+            <div class="value" id="invoiceHeader"></div>
+        </div>
+
+        <div class="section">
+            <div class="label">Order Summary:</div>
+            <div class="value" id="orderSummary"></div>
+        </div>
+
+        <div class="section">
+            <div class="label">Full Invoice:</div>
+            <div class="value" id="fullInvoice"></div>
+        </div>
+    </div>
+
+    <script>
+        // Basic strings
+        let firstName = "Asha";
+        let lastName = "Sharma";
+        let city = "Delhi";
+        let country = "India";
+
+        // String operations
+        let fullName = firstName + " " + lastName;
+        let email = firstName.toLowerCase() + "@example.com";
+        let welcomeMessage = "Welcome, " + fullName + "!";
+
+        // Template literals with interpolation
+        // This is a multi-line string using backticks (`)[below escape key]
+        // Inside ${ }, we can directly insert variables into the string.
+        
+        let customerDetails = `Name: ${fullName}
+        City: ${city}, ${country}
+        Email: ${email}`;
+        // Result example:
+        // Name: Asha Sharma
+        // City: Delhi, India
+        // Email: asha@example.com
+
+        // A simple string for invoice number
+        let invoiceNumber = "INV-2026-001";
+
+        // A simple string for date
+        let date = "23 July 2026";
+
+        // Another template literal that uses the invoice number, date, and full name
+        // Again, ${ } is used to insert variable values into the string.
+
+        let invoiceHeader = `Invoice: ${invoiceNumber}
+        Date: ${date}
+        Customer: ${fullName}`;
+        // Result example:
+        // Invoice: INV-2026-001
+        // Date: 23 July 2026
+        // Customer: Asha Sharma
+
+        // Using strings and template literals together
+        let product1 = "Laptop";
+        let product2 = "Mouse";
+        let price1 = 45000;
+        let price2 = 800;
+        let quantity1 = 1;
+        let quantity2 = 2;
+
+        let total = price1 * quantity1 + price2 * quantity2;
+
+        let orderSummary = `Items:
+        1. ${product1} x ${quantity1} = ${price1 * quantity1}
+        2. ${product2} x ${quantity2} = ${price2 * quantity2}
+
+        Total Amount: ${total}`;
+
+        // Multi-line template literal for full invoice
+        let thankYouNote = `Thank you for your purchase, ${fullName}!
+        Your order will be delivered to ${city}.
+        For support, contact ${email}.`;
+
+        // Combine multiple parts into one full invoice string
+        let fullInvoice = `${invoiceHeader}
+
+        --- Order Details ---
+        ${orderSummary}
+
+        --- Note ---
+        ${thankYouNote}`;
+
+        // ${invoiceHeader} → inserts header
+        // ${orderSummary} → inserts order items and total
+        // ${thankYouNote} → inserts thank-you message
+
+        // Display on page
+        document.getElementById("customerDetails").textContent = customerDetails;
+        document.getElementById("invoiceHeader").textContent = invoiceHeader;
+        document.getElementById("orderSummary").textContent = orderSummary;
+        document.getElementById("fullInvoice").textContent = fullInvoice;
+    </script>
+</body>
+
+</html>
