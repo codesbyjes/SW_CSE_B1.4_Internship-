@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Object Destructuring Example</title>
+</head>
+<body>
+    <p id="output"></p>
+    <script>
+        const outputL1 = document.getElementById("output");
+        let out = "";
+
+        function log(msg){
+            out += msg + "\n";
+            outputL1.textContent = out;
+            console.log(msg);
+        }
+        // Object
+        const user = {
+            name: "Jes",
+            age: 18,
+            city: "Bangalore",
+            contacts:{
+                email:"jes@gmail.com",
+                phone: "1234567890"
+            }
+        };
+
+        // Basic object destructuring
+        const {name,age,city} = user;
+        log("Name:" +name );
+        log("Age:" +age);
+        log("City:" +city);
+
+        // Renaming a property
+        const { name: userName, age: userAge} = user;
+        log("User Name: "+userName);
+        log("User Age: "+userAge);
+
+        // nested object destructuring
+        const {
+            name: fullName,
+            contacts: {email,phone}
+        } = user;
+        log("Full Name: "+fullName);
+        log("Email: "+email);
+        log("Phone: "+phone);
+    </script>
+</body>
+</html>
