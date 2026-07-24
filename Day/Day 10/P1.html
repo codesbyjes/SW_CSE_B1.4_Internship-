@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arrays Example 1</title>
+</head>
+<body>
+    <h3>All Items</h3>
+    <ul id="allItems"></ul>
+
+    <h3>In Stock Items</h3>
+    <ul id="inStockItems"></ul>
+
+    <script>
+        // Array of objects
+        const products = [
+            {id:1,name:"Laptop",price:75000,inStock:true},
+            {id:2,name:"Mouse",price:750,inStock:true},
+            {id:3,name:"Keyboard",price:2500,inStock:false},
+            {id:4,name:"Monitor",price:15000,inStock:true},
+            {id:5,name:"Speakers",price:85000,inStock:false},
+        ];
+
+        const allItemsL1 = document.getElementById("allItems");
+        const inStockItemsL2 = document.getElementById("inStockItems");
+
+        //map
+        const allItemElements = products.map(product => {
+            const li = document.createElement("li");
+            li.textContent = product.name + " | Rs. " +product.price+(product.inStock ? "(In Stock)":"(Out of Stock)");
+            return li;
+        });
+
+        allItemElements.forEach(li => allItemsL1.appendChild(li));
+
+        // filter: 
+        const inStockProducts = products.filter(p=>p.inStock);
+        //map
+        const inStockItemElements = inStockProducts.map(product => {
+            const li = document.createElement("li");
+            li.textContent = product.name + " | Rs. " +product.price;
+            return li;
+        });
+
+        inStockItemElements.forEach(li => inStockItemsL2.appendChild(li));
+    </script>
+</body>
+</html>
