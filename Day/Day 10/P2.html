@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arrays Example 2</title>
+</head>
+
+<body>
+    <h3>Non Mutating array functions</h3>
+    <input type="text" id="taskInput" placeholder="New Task">
+    <button id="addBtn">Add</button>
+    <button id="clearCompleteBtn">Clear Completed</button>
+    <ul id="taskList"></ul>
+    
+    <script>
+        let tasks = [
+            {id:1,text:"Learn Arrays",completed:true},
+            {id:2,text:"Learn Functions",completed:true},
+            {id:3,text:"Learn React",completed:false},
+            {id:4,text:"Learn HTML",completed:true},
+            {id:5,text:"Build a Project",completed:false},
+        ];
+
+        const taskListL1 = document.getElementById("taskList");
+        const inputL2 = document.getElementById("taskInput"); 
+
+        function renderTasks(){
+            taskListL1.innerHTML = "";
+
+            tasks.forEach(task => {
+                let li = document.createElement("li");
+                li.textContent = (task.completed ? "Done: " : "Not Done: ") + task.text;
+
+                // Click to toggle completed
+                li.addEventListener("click",() => {
+                    toggleTask(task.id);
+                });
+
+                taskListL1.appendChild(li);
+            });
+        }
+
+        function addTask(text){
+            const newTask = {
+                id:Date.now(),
+                text,
+                completed:false
+            };
+            tasks = [...tasks,newTask];
+            renderTasks();
+        }
+
+        function toggleTask(id){
+            tasks = tasks.map(task => {
+                if(task.id === id){
+                    return{...task,completed:!task.completed};
+                }
+                return task;
+            });
+            renderTasks();
+        }
+
+        function clearCompleted(){
+            tasks = tasks.filter(task => !task.completed);
+            renderTasks();
+        }
+
+        // Event handlers
+        document.getElementById("addBtn").addEventListener("click",()=>{
+            const text = inputL2.value.trim();
+            if(text){
+                addTask(text);
+                inputL2.value = "";
+            }
+        });
+
+        document.getElementById("clearCompleteBtn").addEventListener("click",clearCompleted);
+        renderTasks();
+    </script>
+</body>
+
+</html>
