@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Array Destructuring Example</title>
+</head> 
+<body>
+    <pre id="output"></pre>
+    <script>
+        const outputL1 = document.getElementById("output");
+        let out = "";
+
+        function log(msg){
+            out += msg + "\n";
+            outputL1.textContent = out;
+            console.log(msg);
+        }
+
+        const colors = ["red","green","blue","purple","yellow"];
+
+        // Basic destructuring
+        const [first,second,third] = colors;
+        log("First: " +first);
+        log("Second: " +second);
+        log("Third: " +third);
+
+        // Skipping elements
+        const [c1,,c3]=colors;
+        log("First: "+c1+" Third: "+c3);
+
+        // Default values 
+        const[a,b,c,d,e,f="orange"] = colors;
+        log("Default: "+f);
+
+        // Rest operator *****
+        const [head,...rest] = colors;
+        log("Head: "+head);
+        log("Rest: "+rest);
+        log("Rest: "+rest.join(", "));
+
+    </script>
+</body>
+</html>
