@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Promise chaining Example</title>
+</head>
+<body>
+    <button id="chainBtn">Run Chain Task</button>
+    <pre id="output"></pre>
+    <script>
+        const output = document.getElementById("output");
+        const chainBtn = document.getElementById("chainBtn");
+
+        function log(msg){
+            output.textContent += msg + "\n";
+            console.log(msg);
+        }
+
+        function stepOne(){
+            return new Promise((resolve)=>{
+                setTimeout(()=>resolve("Step 1 done"),1000);
+            });
+        }
+        
+        
+        function stepTwo(previous){
+            return new Promise((resolve)=>{
+                setTimeout(()=>resolve(previous+ " Step 2 done"),1000);
+            });
+        }
+
+        chainBtn.addEventListener("click",() => {
+            output.textContent = "";
+
+            stepOne()
+                .then((result1)=>{
+                    log(result1);
+                    return stepTwo(result1);
+                })
+                .then((result2)=>{
+                    log(result2)
+                })
+                .catch((error)=>{
+                    log("Error: "+error);
+                });
+        });
+    </script>
+</body>
+</html>
