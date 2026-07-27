@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Async and Await Example</title>
+</head>
+<body>
+    <button id="fetchBtn">Fetch User</button>
+    <pre id="output"></pre>
+    <script>
+        const output = document.getElementById("output");
+        const fetchBtn = document.getElementById("fetchBtn");
+
+        function log(msg){
+            output.textContent += msg + "\n";
+            console.log(msg);
+        }
+
+       function fetchUser(){
+        return new Promise((resolve)=>{
+            setTimeout(()=>{
+                resolve({
+                    name:"Asha",
+                    age:25
+                });
+            },1500);
+        });
+       }
+
+       async function loadUser(){
+            try{
+                log("Loading User...");
+                const user = await fetchUser(); 
+
+                log("Name: "+user.name);
+                log("Age: "+user.age);
+            }
+            catch(error){
+                log("Eror: "+error);
+            }
+       }
+
+        fetchBtn.addEventListener("click",() => {
+            output.textContent = "";
+            loadUser();
+        });
+    </script>
+</body>
+</html>
