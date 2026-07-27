@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Promise Example</title>
+</head>
+<body>
+    <button id="loadBtn">Load Task</button>
+    <pre id="output"></pre>
+    <script>
+        const output = document.getElementById("output");
+        const loadBtn = document.getElementById("loadBtn");
+
+        function log(msg){
+            output.textContent += msg + "\n";
+            console.log(msg);
+        }
+
+        function getData(){
+            // creation of promise
+            return new Promise((resolve,reject)=>{
+                setTimeout(()=>{
+                    const success = true;
+
+                    if (success) {
+                        resolve("Data loaded successfully");
+                    }
+                    else{
+                        reject("Failed to load data");
+                    }
+                },1500);
+            });
+        }
+        
+        loadBtn.addEventListener("click",() => {
+            log("Request started");
+            getData()
+            .then((result)=>{
+                log("Success: "+result);
+            })
+            .catch((error)=>{
+                log("Error:"+error);
+            });
+        });
+    </script>
+</body>
+</html>
