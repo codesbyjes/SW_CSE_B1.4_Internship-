@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Conditionals & Loops - Program 1</title>
+  <style>
+    pre { background: #f5f5f5; padding: 8px; }
+  </style>
+</head>
+<body>
+  <h2>Program 1: Conditionals and basic loops</h2>
+  <p>Open the console to see the output.</p>
+  <pre id="output"></pre>
+
+  <script>
+    const outputEl = document.getElementById("output");
+    let out = "";
+
+    function log(msg) {
+      out += msg + "\n";
+      outputEl.textContent = out;
+      console.log(msg);
+    }
+
+    // ----- Conditionals -----
+
+    const age = 20;
+
+    // if...else
+    if (age >= 18) {
+      log("You are an adult.");
+    } else {
+      log("You are a minor.");
+    }
+
+    // if...else if...else
+    const score = 78;
+
+    if (score >= 90) {
+      log("Grade: A");
+    } else if (score >= 75) {
+      log("Grade: B");
+    } else if (score >= 60) {
+      log("Grade: C");
+    } else {
+      log("Grade: D");
+    }
+
+    // Ternary operator
+    const status = age >= 18 ? "Adult" : "Minor";
+    log("Status: " + status);
+
+    // Switch statement
+    const day = "Friday";
+
+    switch (day) {
+      case "Monday":
+        log("Start of the week");
+        break;
+      case "Friday":
+        log("End of the work week");
+        break;
+      case "Saturday":
+      case "Sunday":
+        log("Weekend");
+        break;
+      default:
+        log("Regular day");
+    }
+
+    // Logical operators in conditions
+    const hasTicket = true;
+    const hasId = false;
+
+    if (hasTicket && hasId) {
+      log("Entry allowed (both)");
+    } else if (hasTicket || hasId) {
+      log("Entry allowed (one of them)");
+    } else {
+      log("Entry not allowed");
+    }
+
+    // ----- Loops -----
+
+    // for loop
+    log("Counting with for:");
+    for (let i = 1; i <= 5; i++) {
+      log("i = " + i);
+    }
+
+    // for loop with break
+    log("for with break at 3:");
+    for (let i = 1; i <= 5; i++) {
+      if (i === 3) {
+        break;
+      }
+      log("i = " + i);
+    }
+
+    // for loop with continue
+    log("for with continue at 3:");
+    for (let i = 1; i <= 5; i++) {
+      if (i === 3) {
+        continue;
+      }
+      log("i = " + i);
+    }
+
+    // while loop
+    log("while loop:");
+    let count = 0;
+    while (count < 3) {
+      log("count = " + count);
+      count++;
+    }
+
+    // do...while loop
+    log("do...while loop:");
+    let num = 0;
+    do {
+      log("num = " + num);
+      num++;
+    } while (num < 3);
+  </script>
+</body>
+</html>
