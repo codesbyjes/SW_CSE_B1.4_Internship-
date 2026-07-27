@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Asychronous code with setTimeout()</title>
+</head>
+<body>
+    <pre id="output"></pre>
+    <script>
+        const output = document.getElementById("output");
+        function log(msg){
+            output.textContent += msg + "\n";
+            console.log(msg);
+        }
+        log("1. Before timeout");
+        setTimeout(()=>{
+            log("3. Inside timeout after 3 seconds");
+        },3000)
+        
+        log("2. After the timeout call");
+    </script>
+</body>
+</html>
