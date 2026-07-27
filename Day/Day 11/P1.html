@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Simple DOM Manipulation Example</title>
+  <style>
+    body { font-family: sans-serif; padding: 20px; }
+    .box {
+      padding: 15px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+    }
+    .highlight {
+      background-color: yellow;
+    }
+    button { margin: 5px; padding: 6px 10px; }
+  </style>
+</head>
+<body>
+  <h1>Simple DOM Manipulation Example</h1>
+
+  <p id="intro">This is the original text.</p>
+
+  <div class="box" id="myBox">
+    I am a box.
+  </div>
+
+  <button id="changeTextBtn">Change Text</button>
+  <button id="toggleClassBtn">Toggle Highlight</button>
+  <button id="addColorBtn">Change Background</button>
+  <button id="addItemBtn">Add New Item</button>
+  <button id="removeLastBtn">Remove Last Item</button>
+
+  <ul id="list">
+    <li>Item 1</li>
+    <li>Item 2</li>
+    <li>Item 3</li>
+  </ul>
+
+  <script>
+    // Select elements
+    const intro = document.getElementById("intro");
+    const myBox = document.getElementById("myBox");
+    const list = document.getElementById("list");
+
+    const changeTextBtn = document.getElementById("changeTextBtn");
+    const toggleClassBtn = document.getElementById("toggleClassBtn");
+    const addColorBtn = document.getElementById("addColorBtn");
+    const addItemBtn = document.getElementById("addItemBtn");
+    const removeLastBtn = document.getElementById("removeLastBtn");
+
+    // Change text content
+    changeTextBtn.addEventListener("click", () => {
+      intro.textContent = "Text has been changed with JavaScript!";
+    });
+
+    // Toggle a CSS class
+    toggleClassBtn.addEventListener("click", () => {
+      myBox.classList.toggle("highlight");
+    });
+
+    // Change inline style
+    addColorBtn.addEventListener("click", () => {
+      // Toggle between two colors
+      if (myBox.style.backgroundColor === "lightblue") {
+        myBox.style.backgroundColor = "";
+      } else {
+        myBox.style.backgroundColor = "lightblue";
+      }
+    });
+
+    // Create and add a new list item
+    addItemBtn.addEventListener("click", () => {
+      const newItem = document.createElement("li");
+      newItem.textContent = "New item added";
+      list.appendChild(newItem);
+    });
+
+    // Remove the last list item
+    removeLastBtn.addEventListener("click", () => {
+      const lastItem = list.lastElementChild;
+      if (lastItem) {
+        lastItem.remove();
+      }
+    });
+  </script>
+</body>
+</html>
