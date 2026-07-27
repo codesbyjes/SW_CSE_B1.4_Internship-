@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Synchronous code</title>
+</head>
+<body>
+    <pre id="output"></pre>
+    <script>
+        const output = document.getElementById("output");
+        function log(msg){
+            output.textContent += msg + "\n";
+            console.log(msg);
+        }
+        log("1. Start");
+        for (let i = 1;i<=3;i++){
+            log("2. Loop step"+i);
+        }
+        log("3. End");
+    </script>
+</body>
+</html>
