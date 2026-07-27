@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Conditionals & Loops - Program 2</title>
+  <style>
+    pre { background: #f5f5f5; padding: 8px; }
+  </style>
+</head>
+<body>
+  <h2>Program 2: Loops over arrays and logic</h2>
+  <p>Open the console to see the output.</p>
+  <pre id="output"></pre>
+
+  <script>
+    const outputEl = document.getElementById("output");
+    let out = "";
+
+    function log(msg) {
+      out += msg + "\n";
+      outputEl.textContent = out;
+      console.log(msg);
+    }
+
+    const numbers = [3, 7, 10, 12, 5];
+    const users = [
+      { name: "Asha", age: 17 },
+      { name: "Riya", age: 20 },
+      { name: "Neha", age: 15 }
+    ];
+
+    // for...of over array
+    log("Numbers:");
+    for (const n of numbers) {
+      log("Number: " + n);
+    }
+
+    // for with index
+    log("Numbers with index:");
+    for (let i = 0; i < numbers.length; i++) {
+      log("Index: " + i + ", Value: " + numbers[i]);
+    }
+
+    // Condition inside loop: count evens
+    let evenCount = 0;
+    for (const n of numbers) {
+      if (n % 2 === 0) {
+        evenCount++;
+      }
+    }
+    log("Even count: " + evenCount);
+
+    // Build a new array using a loop
+    const doubled = [];
+    for (const n of numbers) {
+      doubled.push(n * 2);
+    }
+    log("Doubled: " + doubled.join(", "));
+
+    // Find first adult using loop + condition + break
+    let firstAdult = null;
+    for (const user of users) {
+      if (user.age >= 18) {
+        firstAdult = user.name;
+        break;
+      }
+    }
+    log("First adult: " + (firstAdult || "None"));
+
+    // Nested loops: simple table
+    log("Simple table (3x3):");
+    for (let i = 1; i <= 3; i++) {
+      let row = "";
+      for (let j = 1; j <= 3; j++) {
+        row += (i * j) + " ";
+      }
+      log(row.trim());
+    }
+
+    // Skip some values with continue
+    log("Numbers greater than 6 (skip others):");
+    for (const n of numbers) {
+      if (n <= 6) {
+        continue;
+      }
+      log("n = " + n);
+    }
+  </script>
+</body>
+</html>
