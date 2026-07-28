@@ -1,0 +1,7 @@
+Fetch API:
+
+it is used get data from a server or send data to a server using HTTP requests.
+Fetch API JSON format for communication
+Client (Browser) ----- > Request (image/video/text -- > Server)
+
+Axios:
