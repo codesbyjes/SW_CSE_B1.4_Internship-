@@ -6,6 +6,14 @@ import InfoBoxDemo from "./components/PropsTwo";
 
 import './App.css'
 
+import Counter from "./components/State";
+import ToggleText from "./components/StateTwo";
+import NameInput from "./components/StateThree";
+
+import ClickDemo from "./components/EventHandling";
+import FormDemo from "./components/EventHandlingTwo";
+import ActionButtons from "./components/EventHandlingThree";
+
 const name = "Amay";
 const isLoggedIn = false;
 
@@ -38,6 +46,16 @@ function App() {
       <ProfileList />
 
       <InfoBoxDemo />
+
+      <Counter />
+
+      <ToggleText />
+
+      <NameInput />
+
+      <ClickDemo/>
+      <FormDemo/>
+      <ActionButtons/>
     </>
     
   )
