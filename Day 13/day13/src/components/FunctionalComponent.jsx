@@ -1,6 +1,6 @@
-// Default export 
+// Default export
 const Button = () => {
-    <p>A click me button from components</p>
-    return <button>Click Me</button>
+    return <button>Click Me once</button>
 }
+
 export default Button;

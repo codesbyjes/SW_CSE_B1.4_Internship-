@@ -1,51 +1,46 @@
 import Button from './components/FunctionalComponent'
-import{LefArrow,RightArrow} from './components/FunctionalComponent2'
+import { LeftArrow,RightArrow } from "./components/FunctionalComponentTwo";
 
-const name = "Jes"
+import ProfileList from "./components/Props";
+import InfoBoxDemo from "./components/PropsTwo";
 
-const IsLoggedIn = true
+import './App.css'
 
- 
+const name = "Amay";
+const isLoggedIn = false;
 
 function App() {
+ 
   return (
     // React Fragments
     <>
-      <p>
-      Rule 1 : Return one parent element
-      </p>
-      <h3>hello</h3>
-      <h3>hello again</h3>
-      <br></br>
+      {/* JSX Rule 1: Return one parent element */}
+      <h1>Hello</h1>
+      <p>Hello again</p>
 
-     <p>
-      Rule 2:  every tag must be closed properly
-      </p>
+      {/* JSX Rule 2: Every tag must be closed properly */}
+      <p>Error</p>
+      <input type="text" />
 
-      <h3>Error</h3>
-      <input type = "text"/>
-      <br></br><br></br>
+      {/* JSX Rule 3: use camelCase for attributes */}
+      <button onClick onSubmit>Click</button>
 
-      <p>
-      Rule 3: use camelCase for attributes
-      </p>
-      <button OnClick><h3>click</h3></button>
-      <br></br>
+      {/* JSX Rule 4: Embedding JavaScript with curly braces */}
+      <h3>Hello, {name}</h3>
 
-      <p>
-      Rule 4: embedding javascript with curly braces*/</p>
-      <h3>Hello, {name} </h3>
+      {/* JSX Rule 5: use expressions, not statements */}
+      <p>{isLoggedIn ? "Welcome back" : "Please Login"}</p>
 
-      <p>rule 5: use expressions, not statements</p>
-      <h3>{IsLoggedIn ? "welcome back": "please Login"}</h3>
+      <Button />
+      <LeftArrow />
+      <RightArrow />
 
-      <Button/>
-      <LeftArrow/>
-      <RightArrow/>
+      <ProfileList />
 
-
+      <InfoBoxDemo />
     </>
     
   )
 }
+
 export default App

@@ -1,4 +1,4 @@
-.counter {
+/* .counter {
   font-size: 16px;
   padding: 5px 10px;
   border-radius: 5px;
@@ -181,4 +181,15 @@
     right: 0;
     border-right-color: var(--border);
   }
+} */
+
+
+.box{
+  border: 1px solid rgb(127, 213, 40);
+  padding: 12px;
+  margin: 10px 0;
+}
+
+.box-primary{
+  background-color: rgb(224, 246, 226);
 }
