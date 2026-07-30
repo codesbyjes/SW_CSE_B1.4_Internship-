@@ -182,3 +182,9 @@
     border-right-color: var(--border);
   }
 }
+
+.list-box{
+  border: 1px solid brown;
+  padding: 12px;
+  margin: 10px 0;
+}
