@@ -1,22 +1,22 @@
-function UserList(){
+function UserList() {
     const users = [
-        
-            {id:1,name:"Jes",role:"developer"},
-            {id:2,name:"ini",role:"software engineer"},
-            {id:3,name:"pinky",role:"IT professional"},
-        
-        
+       {id: 1, name:"Rakesh",role:"Developer"},
+       {id: 2, name:"Sandy",role:"Artist"},
+       {id: 3, name:"Akshay",role:"Farmer"},
+       {id: 4, name:"Rakesh",role:"Developer"},
     ];
-    return (
-        <div ClassName = "list-box">
+    return(
+        <div className="list-box">
             <h3>User List</h3>
             <ul>
-                {/*map()*/}
+                {/* map() */}
                 {users.map((user)=>(
-                    <li key={user.id}> {user.name}, is a {user.role}</li>
+                    <li key={user.id}>
+                        {user.name}, is a {user.role}
+                    </li>
                 ))}
             </ul>
         </div>
-    )
+    );
 }
 export default UserList;
