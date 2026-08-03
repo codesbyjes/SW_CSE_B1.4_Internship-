@@ -1,0 +1,247 @@
+.timeline-section{
+    position:relative;
+    z-index:2;
+}
+
+.timeline{
+
+    position:relative;
+
+    width:90%;
+
+    margin:auto;
+
+    margin-top:35px;
+
+    padding:0;
+}
+
+.timeline::before{
+
+    content:"";
+
+    position:absolute;
+
+    left:50%;
+
+    transform:translateX(-50%);
+
+    width:2px;
+
+    top:0;
+
+    bottom:0;
+
+    background:rgba(212,175,55,.35);
+}
+
+/* ---------------- */
+
+.timeline-item{
+
+    position:relative;
+
+    width:50%;
+
+    padding:20px 40px;
+
+    opacity:0;
+
+    transform:translateY(40px);
+
+    transition:
+        opacity .7s ease,
+        transform .7s ease;
+}
+
+.timeline.is-visible .timeline-item{
+
+    opacity:1;
+
+    transform:translateY(0);
+}
+
+/* LEFT */
+
+.timeline-item.left{
+
+    left:0;
+
+    text-align:right;
+}
+
+/* RIGHT */
+
+.timeline-item.right{
+
+    left:50%;
+
+    text-align:left;
+}
+
+/* DOT */
+
+.timeline-dot{
+
+    position:absolute;
+
+    width:16px;
+
+    height:16px;
+
+    background:var(--gold);
+
+    border-radius:50%;
+
+    top:35px;
+
+    box-shadow:0 0 14px rgba(212,175,55,.7);
+
+    transition:.35s;
+}
+
+.timeline-item.left .timeline-dot{
+
+    right:-8px;
+}
+
+.timeline-item.right .timeline-dot{
+
+    left:-8px;
+}
+
+/* CARD */
+
+.timeline-content{
+
+    background:var(--glass);
+
+    backdrop-filter:blur(14px);
+
+    border:1px solid rgba(212,175,55,.18);
+
+    border-radius:18px;
+
+    padding:22px;
+
+    transition:.35s;
+}
+
+.timeline-year{
+
+    display:inline-block;
+
+    color:var(--gold-soft);
+
+    font-family:'Playfair Display',serif;
+
+    font-weight:700;
+
+    margin-bottom:8px;
+}
+
+.timeline-content p{
+
+    color:var(--text-muted);
+
+    line-height:1.7;
+
+    margin:0;
+}
+
+/* -------------------- */
+/* AMAZING HOVER */
+/* -------------------- */
+
+.timeline-item:hover .timeline-content{
+
+    transform:translateY(-10px) scale(1.02);
+
+    border-color:rgba(212,175,55,.55);
+
+    box-shadow:
+
+        0 0 25px rgba(212,175,55,.25),
+
+        0 12px 35px rgba(0,0,0,.3);
+}
+
+.timeline-item:hover .timeline-dot{
+
+    transform:scale(1.6);
+
+    box-shadow:
+
+        0 0 25px rgba(212,175,55,1),
+
+        0 0 45px rgba(212,175,55,.5);
+}
+
+.timeline-item:hover::after{
+
+    content:"";
+
+    position:absolute;
+
+    top:42px;
+
+    width:40px;
+
+    height:2px;
+
+    background:var(--gold);
+}
+
+.timeline-item.left:hover::after{
+
+    right:8px;
+}
+
+.timeline-item.right:hover::after{
+
+    left:8px;
+}
+
+/* MOBILE */
+
+@media(max-width:768px){
+
+.timeline::before{
+
+left:20px;
+
+}
+
+.timeline-item{
+
+width:100%;
+
+left:0!important;
+
+padding-left:55px;
+
+padding-right:10px;
+
+text-align:left;
+
+}
+
+.timeline-dot{
+
+left:12px!important;
+
+right:auto!important;
+
+}
+
+.timeline-item:hover::after{
+
+left:28px;
+
+right:auto;
+
+width:25px;
+
+}
+
+}

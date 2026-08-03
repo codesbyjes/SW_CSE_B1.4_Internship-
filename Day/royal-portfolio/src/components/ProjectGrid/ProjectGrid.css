@@ -1,0 +1,27 @@
+.project-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 26px;
+}
+
+.project-grid-item {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.project-grid.is-visible .project-grid-item:nth-child(1) { transition-delay: 0.05s; }
+.project-grid.is-visible .project-grid-item:nth-child(2) { transition-delay: 0.15s; }
+.project-grid.is-visible .project-grid-item:nth-child(3) { transition-delay: 0.25s; }
+.project-grid.is-visible .project-grid-item:nth-child(4) { transition-delay: 0.35s; }
+
+.project-grid.is-visible .project-grid-item {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (max-width: 700px) {
+  .project-grid {
+    grid-template-columns: 1fr;
+  }
+}

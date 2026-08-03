@@ -1,0 +1,185 @@
+.navbar-bg-card {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  margin: 16px 16px 0;
+  border-radius: 20px;
+  overflow: hidden;
+  border: 1px solid var(--border-gold);
+  box-shadow: 0 12px 30px var(--shadow);
+
+  /* Placeholder background: a deep burgundy-to-black gradient so it
+     already looks intentional. Once you add your own image, uncomment
+     the background-image line below and point it at your file
+     (e.g. public/navbar-bg.jpg -> url('/navbar-bg.jpg')). It will sit
+     UNDER this gradient, which doubles as a dark overlay so nav text
+     stays readable over any photo. */
+  background:
+    linear-gradient(120deg, rgba(9,7,8,0.88), rgba(58,13,24,0.8));
+  /* background-image: url('/navbar-bg.jpg'); */
+  background-size: cover;
+  background-position: center;
+}
+
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 28px;
+  backdrop-filter: blur(4px);
+}
+
+.logo-mark {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.4rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: var(--gold-soft);
+  border: 1px solid var(--border-gold);
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+  
+}
+.logo-mark img {
+  width: 34px;
+  height: 34px;
+  object-fit: contain;
+}
+
+.logo-mark:hover {
+  box-shadow: 0 0 16px rgba(212, 175, 55, 0.5);
+  transform: scale(1.05);
+}
+.logo-mark:hover img {
+  transform: scale(1.08);
+}
+
+.nav-links ul {
+  display: flex;
+  gap: 8px;
+}
+
+.nav-link {
+  position: relative;
+  color: white;
+  font-size: 0.95rem;
+  letter-spacing: 0.5px;
+  padding: 8px 16px;
+  opacity: 0.85;
+  transition: opacity 0.3s ease, color 0.3s ease;
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  left: 16px;
+  right: 16px;
+  bottom: 2px;
+  height: 2px;
+  background: linear-gradient(90deg, var(--gold), var(--gold-soft));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s ease;
+}
+
+.nav-link:hover {
+  opacity: 1;
+}
+
+.nav-link.active {
+  opacity: 1;
+  color: var(--gold-soft);
+  text-shadow: 0 0 10px rgba(212, 175, 55, 0.35);
+}
+
+.nav-link.active::after {
+  transform: scaleX(1);
+}
+
+.navbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+/* Theme toggle - a small pill that slides a sun/moon thumb */
+.toggle-track {
+  display: inline-flex;
+  align-items: center;
+  width: 52px;
+  height: 28px;
+  border-radius: 999px;
+  border: 1px solid var(--border-gold);
+  padding: 3px;
+  transition: background 0.4s ease;
+}
+
+.toggle-track.dark { justify-content: flex-start; background: rgba(255,255,255,0.05); }
+.toggle-track.light { justify-content: flex-end; background: rgba(181,138,42,0.12); }
+
+.toggle-thumb {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--gold), var(--gold-soft));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  transition: transform 0.4s ease;
+}
+
+/* Hamburger, hidden on desktop */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  width: 28px;
+}
+
+.hamburger span {
+  height: 2px;
+  background: var(--gold-soft);
+  border-radius: 2px;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.hamburger.open span:nth-child(2) { opacity: 0; }
+.hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+@media (max-width: 860px) {
+  .hamburger { display: flex; }
+
+  .nav-links {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    max-height: 0;
+    overflow: hidden;
+    background: var(--glass);
+    backdrop-filter: blur(10px);
+    transition: max-height 0.4s ease;
+  }
+
+  .nav-links.open {
+    max-height: 340px;
+  }
+
+  .nav-links ul {
+    flex-direction: column;
+    padding: 10px 20px 20px;
+  }
+
+  .nav-link::after {
+    left: 0;
+    right: auto;
+    width: 24px;
+  }
+}

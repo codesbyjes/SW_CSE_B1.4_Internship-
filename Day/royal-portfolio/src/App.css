@@ -1,0 +1,133 @@
+.app-shell {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.app-main {
+  flex: 1;
+}
+
+/* Skills page grid - lives here since Skills.jsx has no dedicated
+   CSS file (it wasn't in the requested page-CSS list, so its layout
+   uses this shared spot instead, same as Projects/Contact/Home do). */
+.skills-grid-page {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 24px;
+}
+
+/* Project Detail page layout */
+.back-btn {
+  margin-bottom: 30px;
+}
+
+/* Full-width hero image banner, sits above the project info */
+.project-hero-banner {
+  width: 100%;
+  aspect-ratio: 16 / 8;
+  overflow: hidden;
+  margin-bottom: 40px;
+  border: 1px solid var(--border-gold);
+  box-shadow: 0 16px 44px var(--shadow);
+}
+
+.project-hero-banner img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.project-placeholder.large {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Playfair Display', serif;
+  font-size: 5rem;
+  color: var(--gold);
+  background: linear-gradient(135deg, var(--burgundy), var(--bg));
+}
+
+.project-detail-info {
+  max-width: 760px;
+}
+
+.project-detail-description {
+  color: var(--text-muted);
+  margin: 16px 0 26px;
+}
+
+.project-meta {
+  display: grid;
+  gap: 16px;
+  margin-bottom: 30px;
+}
+
+.project-meta dt {
+  color: var(--gold-soft);
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  margin-bottom: 3px;
+}
+
+.project-meta dd {
+  color: var(--text);
+}
+
+.project-detail-cta {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 800px) {
+  .project-hero-banner {
+    aspect-ratio: 4 / 3;
+  }
+}
+
+/* Contact page layout */
+.contact-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 50px;
+  align-items: start;
+}
+
+.contact-intro {
+  color: var(--text-muted);
+  margin-bottom: 30px;
+}
+
+.contact-info-list {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.contact-info-list li {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.contact-info-list span {
+  color: var(--gold-soft);
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+}
+
+.contact-info-list a:hover {
+  color: var(--gold);
+}
+
+@media (max-width: 860px) {
+  .contact-layout {
+    grid-template-columns: 1fr;
+  }
+}

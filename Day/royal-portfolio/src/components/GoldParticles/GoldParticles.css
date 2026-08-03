@@ -1,0 +1,48 @@
+.gold-particles {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 3;
+  overflow: hidden;
+}
+
+.spark {
+  position: absolute;
+  bottom: -10px;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--gold-soft), var(--gold) 60%, transparent 70%);
+  box-shadow: 0 0 6px 1px var(--gold);
+  opacity: 0;
+  animation-name: floatUp;
+  animation-timing-function: ease-in;
+  animation-iteration-count: infinite;
+}
+
+/* Sparks are a little more visible in dark mode, since they're the
+   whole point of the luxury effect there; kept subtle in light mode
+   so they don't look like dust on a bright ivory background */
+:root[data-theme='light'] .spark {
+  opacity: 0;
+  filter: brightness(0.9);
+}
+
+@keyframes floatUp {
+  0% {
+    transform: translate(0, 0);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.85;
+  }
+  80% {
+    opacity: 0.4;
+  }
+  100% {
+    transform: translate(var(--drift), -105vh);
+    opacity: 0;
+  }
+}
+
+@media (max-width: 640px) {
+  .gold-particles { display: none; }
+}

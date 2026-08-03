@@ -1,0 +1,47 @@
+.github-stats {
+  position: relative;
+  z-index: 2;
+}
+
+.github-error {
+  color: var(--text-muted);
+  margin-bottom: 20px;
+  font-size: 0.9rem;
+}
+
+.github-summary-card {
+  padding: 32px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.github-summary-row {
+  display: flex;
+  gap: 48px;
+  flex-wrap: wrap;
+}
+
+.github-label {
+  color: var(--text-muted);
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  margin-bottom: 6px;
+}
+
+.github-value {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.2rem;
+  color: var(--gold-soft);
+}
+
+.github-value.small {
+  font-size: 1.3rem;
+}
+
+.github-visit-btn {
+  white-space: nowrap;
+}
