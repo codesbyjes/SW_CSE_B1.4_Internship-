@@ -131,3 +131,38 @@
     grid-template-columns: 1fr;
   }
 }
+/* ===========================
+   HOME PAGE LAYOUT
+=========================== */
+
+.home-page{
+  position: relative;
+  overflow-x: hidden;
+}
+
+.hero-extension{
+  position: relative;
+  margin-top: -90px;
+  z-index: 8;
+}
+/* ===========================================================
+   SKILLS PAGE SPACING
+=========================================================== */
+
+/* 1. Generous, luxury top spacing below the navbar */
+.skills-page {
+  padding-top: 60px !important; /* Bump up to 70px or 80px if you want even more room */
+}
+
+/* 2. Reset wrapper margin */
+.github-stats-wrapper {
+  margin-top: 0; 
+}
+
+/* 3. Keep top padding inside GitHubStats tidy */
+.github-stats-wrapper .github-stats-section,
+.github-stats-wrapper section,
+.github-stats-section {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+}

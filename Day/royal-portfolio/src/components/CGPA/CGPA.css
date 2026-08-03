@@ -1,1261 +1,526 @@
-/* ============================================================
-   ACADEMIC JOURNEY — "CGPA" section
-   Royal / luxury horizontal timeline — v2 "Ledger & Laurel"
-   Louis Vuitton x Apple x Hogwarts.
-
-   Uses existing theme tokens: --gold, --gold-soft, --bg,
-   --bg-elevated, --shadow. Falls back gracefully if any are
-   undefined so this drops into any page safely.
-
-   NOTE: visuals only. No JS/state logic lives in this file —
-   every animation here is pure CSS keyframe/transition work so
-   the underlying React component logic stays untouched.
-   ============================================================ */
-
-@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500;1,600&display=swap');
+/* ===========================================================
+   CGPA SECTION
+=========================================================== */
 
 .cgpa-section {
-  --cgpa-gold: var(--gold, #d4af37);
-  --cgpa-gold-soft: var(--gold-soft, #f1dfa4);
-  --cgpa-gold-bright: #fbedbc;
-  --cgpa-gold-deep: #8a6a1e;
-  --cgpa-bg: var(--bg, #0b0b0d);
-  --cgpa-bg-elevated: var(--bg-elevated, #17171a);
-  --cgpa-shadow: var(--shadow, 0 20px 60px rgba(0, 0, 0, 0.45));
-  --cgpa-wine: #4a1224;
-  --cgpa-wine-deep: #2c0a13;
-  --cgpa-wine-bright: #7a1f3a;
-  --cgpa-glass: rgba(20, 18, 20, 0.55);
-  --cgpa-display: 'Cinzel', Georgia, serif;
-  --cgpa-serif: 'Cormorant Garamond', Georgia, serif;
-  position: relative;
-  padding: clamp(64px, 8vw, 120px) 0;
-  overflow: hidden;
-  isolation: isolate;
+    position: relative;
+    padding: 90px 0 140px;
+    overflow: hidden;
+    background: transparent;
 }
 
-/* ---------------------------------------------------------
-   Ambient background — faint drifting gold dust
-   --------------------------------------------------------- */
-
-.cgpa-section::before {
-  content: '';
-  position: absolute;
-  inset: -10%;
-  z-index: -1;
-  pointer-events: none;
-  background-image:
-    radial-gradient(1.5px 1.5px at 8% 22%, rgba(241, 223, 164, 0.55), transparent 60%),
-    radial-gradient(1.5px 1.5px at 22% 68%, rgba(212, 175, 55, 0.45), transparent 60%),
-    radial-gradient(1px 1px at 38% 12%, rgba(241, 223, 164, 0.4), transparent 60%),
-    radial-gradient(1.5px 1.5px at 54% 78%, rgba(212, 175, 55, 0.4), transparent 60%),
-    radial-gradient(1px 1px at 68% 34%, rgba(241, 223, 164, 0.5), transparent 60%),
-    radial-gradient(1.5px 1.5px at 82% 58%, rgba(212, 175, 55, 0.4), transparent 60%),
-    radial-gradient(1px 1px at 92% 20%, rgba(241, 223, 164, 0.45), transparent 60%),
-    radial-gradient(1.5px 1.5px at 14% 88%, rgba(212, 175, 55, 0.35), transparent 60%);
-  opacity: 0.5;
-  animation: dust-drift 34s ease-in-out infinite alternate;
-  will-change: transform;
-}
-
-.cgpa-section::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  z-index: -1;
-  pointer-events: none;
-  background: radial-gradient(ellipse 60% 40% at 50% 40%, rgba(122, 31, 58, 0.12), transparent 70%);
-}
-
-@keyframes dust-drift {
-  0% {
-    transform: translate3d(0, 0, 0) scale(1);
-  }
-
-  50% {
-    transform: translate3d(-1.5%, 1.5%, 0) scale(1.02);
-  }
-
-  100% {
-    transform: translate3d(1.5%, -1%, 0) scale(1);
-  }
-}
-
-/* ---------------------------------------------------------
-   Titles
-   --------------------------------------------------------- */
-
-.cgpa-section .section-title {
-  font-family: var(--cgpa-display);
-  letter-spacing: 0.03em;
+.cgpa-section .page-container {
+    width: min(1200px, 92%);
+    margin: auto;
 }
 
 .cgpa-subtitle {
-  text-align: center;
-  font-family: var(--cgpa-display);
-  color: var(--cgpa-gold-soft);
-  font-size: 0.82rem;
-  letter-spacing: 0.32em;
-  text-transform: uppercase;
-  opacity: 0.75;
-  margin-top: 8px;
+    margin-top: 12px;
+    color: rgba(255, 255, 255, .65);
+    text-transform: uppercase;
+    letter-spacing: 5px;
+    font-size: .78rem;
+    text-align: center;
 }
 
 .gold-divider {
-  position: relative;
-  width: 72px;
-  height: 1px;
-  margin: 24px auto 0;
-  background: linear-gradient(90deg, transparent, var(--cgpa-gold), transparent);
-  opacity: 0.85;
+    width: 90px;
+    height: 2px;
+    margin: 34px auto 70px;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        var(--gold, #d4af37),
+        transparent
+    );
 }
 
-.gold-divider::before {
-  content: '\2726';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  color: var(--cgpa-gold);
-  font-size: 0.7rem;
-  background: var(--cgpa-bg);
-  padding: 0 8px;
+/* ===========================================================
+   TIMELINE
+=========================================================== */
+
+.academic-path {
+    position: relative;
+    width: min(900px, 100%);
+    margin: auto;
+    padding: 20px 0;
 }
 
-/* ---------------------------------------------------------
-   Scroll wrapper / track
-   --------------------------------------------------------- */
-
-.cgpa-scroll {
-  width: 100%;
-  overflow-x: auto;
-  overflow-y: visible;
-  padding: 84px 0 48px;
-  -webkit-overflow-scrolling: touch;
-  scrollbar-width: thin;
-  scrollbar-color: var(--cgpa-gold) transparent;
+/* GOLD LINE */
+.academic-path::before {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    transform: translateX(-50%) scaleY(0);
+    transform-origin: top;
+    background: linear-gradient(
+        to bottom,
+        transparent,
+        rgba(212, 175, 55, .9),
+        rgba(212, 175, 55, .9),
+        transparent
+    );
+    box-shadow: 0 0 18px rgba(212, 175, 55, .45);
+    transition: transform 2s cubic-bezier(.2, .8, .2, 1);
 }
 
-.cgpa-scroll::-webkit-scrollbar {
-  height: 6px;
+.academic-path.show::before {
+    transform: translateX(-50%) scaleY(1);
 }
 
-.cgpa-scroll::-webkit-scrollbar-thumb {
-  background: linear-gradient(90deg, var(--cgpa-gold), var(--cgpa-gold-soft));
-  border-radius: 999px;
-}
-
-.cgpa-scroll::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-.cgpa-track {
-  position: relative;
-  display: flex;
-  align-items: center;
-  gap: clamp(40px, 5vw, 76px);
-  width: max-content;
-  min-width: 100%;
-  justify-content: center;
-  padding: 0 clamp(24px, 6vw, 80px);
-}
-
-/* The gold connecting path — layered shimmer + reveal + flowing bead */
-.cgpa-path {
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 50%;
-  height: 3px;
-  border-radius: 999px;
-  transform: translateY(-50%) scaleX(0);
-  transform-origin: left center;
-  background:
-    linear-gradient(90deg, transparent 0%, var(--cgpa-gold) 8%, var(--cgpa-gold-bright) 50%, var(--cgpa-gold) 92%, transparent 100%);
-  box-shadow: 0 0 16px rgba(212, 175, 55, 0.5), 0 0 3px rgba(251, 237, 188, 0.6);
-  transition: transform 1.8s cubic-bezier(0.22, 1, 0.36, 1);
-  z-index: 0;
-  overflow: visible;
-}
-
-.cgpa-track.is-visible .cgpa-path {
-  transform: translateY(-50%) scaleX(1);
-}
-
-/* continuous shimmer sweep across the path once revealed */
-.cgpa-path::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  background: linear-gradient(100deg,
-      transparent 20%,
-      rgba(255, 250, 227, 0.9) 48%,
-      transparent 76%);
-  background-size: 220% 100%;
-  opacity: 0;
-  mix-blend-mode: screen;
-}
-
-.cgpa-track.is-visible .cgpa-path::before {
-  opacity: 1;
-  animation: path-shimmer 3.2s ease-in-out 1.8s infinite;
-}
-
-@keyframes path-shimmer {
-  0% {
-    background-position: 140% 0;
-  }
-
-  100% {
-    background-position: -140% 0;
-  }
-}
-
-/* soft pulse of the whole path so it never reads static */
-.cgpa-track.is-visible .cgpa-path {
-  animation: path-shimmer-reveal 1.8s cubic-bezier(0.22, 1, 0.36, 1) forwards,
-    path-pulse 4.5s ease-in-out 1.8s infinite;
-}
-
-@keyframes path-shimmer-reveal {
-  from {
-    transform: translateY(-50%) scaleX(0);
-  }
-
-  to {
-    transform: translateY(-50%) scaleX(1);
-  }
-}
-
-@keyframes path-pulse {
-
-  0%,
-  100% {
-    box-shadow: 0 0 16px rgba(212, 175, 55, 0.5), 0 0 3px rgba(251, 237, 188, 0.6);
-  }
-
-  50% {
-    box-shadow: 0 0 26px rgba(212, 175, 55, 0.75), 0 0 6px rgba(251, 237, 188, 0.85);
-  }
-}
-
-/* a small traveling mote of light flowing along the path */
-.cgpa-path::after {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 0;
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: var(--cgpa-gold-bright);
-  box-shadow: 0 0 10px 3px rgba(251, 237, 188, 0.85), 0 0 20px 6px rgba(212, 175, 55, 0.5);
-  transform: translate(-50%, -50%);
-  opacity: 0;
-}
-
-.cgpa-track.is-visible .cgpa-path::after {
-  animation: path-flow 3.6s cubic-bezier(0.45, 0, 0.55, 1) 2.2s infinite;
-}
-
-@keyframes path-flow {
-  0% {
-    left: 0%;
-    opacity: 0;
-  }
-
-  8% {
-    opacity: 1;
-  }
-
-  92% {
-    opacity: 1;
-  }
-
-  100% {
-    left: 100%;
-    opacity: 0;
-  }
-}
-
-.cgpa-node-wrap {
-  position: relative;
-  z-index: 1;
-  flex: 0 0 auto;
-}
-
-/* ---------------------------------------------------------
-   Shared node button reset
-   --------------------------------------------------------- */
-
-.cgpa-node {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  background: none;
-  border: none;
-  cursor: pointer;
-  font-family: inherit;
-  padding: 0;
-  width: 108px;
-}
-
-.cgpa-node:focus-visible {
-  outline: 2px solid var(--cgpa-gold-soft);
-  outline-offset: 6px;
-  border-radius: 12px;
-}
-
-.cgpa-node-label {
-  margin-top: 16px;
-  font-family: var(--cgpa-display);
-  font-size: 0.72rem;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--cgpa-gold-soft);
-  opacity: 0.85;
-  white-space: nowrap;
-}
-
-/* ---------------------------------------------------------
-   CURRENT semester node — enlarged, ring, crown, particles
-   --------------------------------------------------------- */
-
-.cgpa-node-current {
-  width: 132px;
-  transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.cgpa-node-current:hover,
-.cgpa-node-current:focus-visible {
-  transform: translateY(-10px);
-}
-
-.cgpa-crown {
-  position: absolute;
-  top: -38px;
-  font-size: 1.85rem;
-  filter: drop-shadow(0 4px 10px rgba(212, 175, 55, 0.55)) drop-shadow(0 0 14px rgba(251, 237, 188, 0.35));
-  animation: crown-float 3.4s ease-in-out infinite;
-  transition: transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
-  z-index: 4;
-}
-
-.cgpa-node-current:hover .cgpa-crown,
-.cgpa-node-current:focus-visible .cgpa-crown {
-  animation-play-state: paused;
-  transform: translateY(-10px) scale(1.14) rotate(-4deg);
-}
-
-@keyframes crown-float {
-
-  0%,
-  100% {
-    transform: translateY(0) rotate(-3deg);
-  }
-
-  50% {
-    transform: translateY(-7px) rotate(3deg);
-  }
-}
-
-/* rotating conic highlight sitting behind the ring — always alive */
-.ring-rotator {
-  position: absolute;
-  width: 148px;
-  height: 148px;
-  border-radius: 50%;
-  background: conic-gradient(from 0deg,
-      transparent 0deg,
-      rgba(251, 237, 188, 0.5) 25deg,
-      transparent 70deg,
-      transparent 290deg,
-      rgba(212, 175, 55, 0.35) 330deg,
-      transparent 360deg);
-  opacity: 0.7;
-  filter: blur(1px);
-  animation: ring-rotator-spin 7s linear infinite;
-  pointer-events: none;
-}
-
-@keyframes ring-rotator-spin {
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-.ring-glow {
-  position: absolute;
-  width: 132px;
-  height: 132px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(212, 175, 55, 0.4), transparent 70%);
-  opacity: 0.55;
-  transition: opacity 0.5s ease, transform 0.5s ease;
-  pointer-events: none;
-}
-
-.cgpa-node-current:hover .ring-glow,
-.cgpa-node-current:focus-visible .ring-glow {
-  opacity: 1;
-  transform: scale(1.32);
-}
+/* ==========================================================
+   LUXURY RING & NODES
+========================================================== */
 
 .progress-ring {
-  width: 130px;
-  height: 130px;
-  transform: rotate(-90deg);
-  transition: transform 6s linear;
-  filter: drop-shadow(0 0 6px rgba(212, 175, 55, 0.35));
+    position: relative;
+    width: 138px;
+    height: 138px;
+    min-width: 138px;
+    min-height: 138px;
+    border-radius: 50%;
+    aspect-ratio: 1 / 1;
+    flex-shrink: 0;
+    transition: .45s;
 }
 
-.cgpa-node-current:hover .progress-ring,
-.cgpa-node-current:focus-visible .progress-ring {
-  transform: rotate(270deg);
+.progress-ring:hover {
+    transform: translateY(-6px) scale(1.02);
 }
 
-.ring-track {
-  fill: var(--cgpa-bg-elevated);
-  stroke: rgba(212, 175, 55, 0.2);
-  stroke-width: 8;
-}
-
-.ring-fill {
-  fill: none;
-  stroke: var(--cgpa-gold);
-  stroke-width: 8;
-  stroke-linecap: round;
-  filter: drop-shadow(0 0 7px rgba(212, 175, 55, 0.7));
-  transition: stroke-dashoffset 1.8s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.cgpa-ring-value {
-  position: absolute;
-  font-family: var(--cgpa-display);
-  font-size: 1.3rem;
-  font-weight: 600;
-  color: var(--cgpa-gold-bright);
-  letter-spacing: 0.02em;
-  text-shadow: 0 0 12px rgba(212, 175, 55, 0.4);
-  inset: 0;
-
-  display: flex;
-
-  align-items: center;
-
-  justify-content: center;
-}
-
-/* Ribbon — luxury medal hanging beneath the ring */
-.cgpa-ribbon {
-  position: relative;
-  display: block;
-  width: 30px;
-  height: 22px;
-  margin-top: 8px;
-  transition: transform 0.4s ease;
-  transform-origin: top center;
-}
-
-.cgpa-ribbon::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(180deg, var(--cgpa-wine-bright), var(--cgpa-wine) 55%, var(--cgpa-wine-deep));
-  clip-path: polygon(0 0, 100% 0, 100% 62%, 50% 100%, 0 62%);
-  box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.18), 0 3px 8px rgba(0, 0, 0, 0.45);
-}
-
-.cgpa-ribbon::after {
-  content: '';
-  position: absolute;
-  left: 50%;
-  top: -3px;
-  width: 13px;
-  height: 13px;
-  border-radius: 50%;
-  transform: translateX(-50%);
-  background: radial-gradient(circle at 35% 30%, var(--cgpa-gold-bright), var(--cgpa-gold) 55%, var(--cgpa-gold-deep));
-  box-shadow: 0 0 6px rgba(212, 175, 55, 0.6), inset 0 0 2px rgba(255, 255, 255, 0.5);
-}
-
-.cgpa-node-current:hover .cgpa-ribbon,
-.cgpa-node-current:focus-visible .cgpa-ribbon {
-  transform: rotate(-6deg) translateY(1px);
-}
-
-/* Particles — hidden by default, drift + fade on hover, staggered & varied */
-.particle {
-  position: absolute;
-  font-size: 0.8rem;
-  opacity: 0;
-  pointer-events: none;
-  z-index: 2;
-}
-
-.particle-1 {
-  top: 12px;
-  left: -10px;
-  font-size: 0.7rem;
-}
-
-.particle-2 {
-  top: 4px;
-  right: -10px;
-  font-size: 0.85rem;
-}
-
-.particle-3 {
-  bottom: 34px;
-  left: -18px;
-  font-size: 0.65rem;
-}
-
-.particle-4 {
-  bottom: 18px;
-  right: -20px;
-  font-size: 0.75rem;
-}
-
-.particle-5 {
-  top: 46%;
-  left: -22px;
-  font-size: 0.7rem;
-}
-
-.particle-6 {
-  top: 40%;
-  right: -24px;
-  font-size: 0.8rem;
-}
-
-.particle-7 {
-  top: -10px;
-  left: 30%;
-  font-size: 0.6rem;
-}
-
-.particle-8 {
-  bottom: 6px;
-  left: 46%;
-  font-size: 0.65rem;
-}
-
-.cgpa-node-current:hover .particle,
-.cgpa-node-current:focus-visible .particle {
-  animation-name: particle-drift;
-  animation-timing-function: ease-out;
-  animation-iteration-count: infinite;
-  animation-duration: 2.1s;
-}
-
-.cgpa-node-current:hover .particle-1,
-.cgpa-node-current:focus-visible .particle-1 {
-  animation-delay: 0s;
-  animation-duration: 1.9s;
-}
-
-.cgpa-node-current:hover .particle-2,
-.cgpa-node-current:focus-visible .particle-2 {
-  animation-delay: 0.25s;
-  animation-duration: 2.3s;
-}
-
-.cgpa-node-current:hover .particle-3,
-.cgpa-node-current:focus-visible .particle-3 {
-  animation-delay: 0.5s;
-  animation-duration: 2s;
-}
-
-.cgpa-node-current:hover .particle-4,
-.cgpa-node-current:focus-visible .particle-4 {
-  animation-delay: 0.75s;
-  animation-duration: 2.4s;
-}
-
-.cgpa-node-current:hover .particle-5,
-.cgpa-node-current:focus-visible .particle-5 {
-  animation-delay: 0.15s;
-  animation-duration: 2.15s;
-}
-
-.cgpa-node-current:hover .particle-6,
-.cgpa-node-current:focus-visible .particle-6 {
-  animation-delay: 0.4s;
-  animation-duration: 1.95s;
-}
-
-.cgpa-node-current:hover .particle-7,
-.cgpa-node-current:focus-visible .particle-7 {
-  animation-delay: 0.6s;
-  animation-duration: 2.35s;
-}
-
-.cgpa-node-current:hover .particle-8,
-.cgpa-node-current:focus-visible .particle-8 {
-  animation-delay: 0.9s;
-  animation-duration: 2.05s;
-}
-
-@keyframes particle-drift {
-  0% {
+.progress-ring::before {
+    content: "";
+    position: absolute;
+    inset: -10px;
+    border-radius: 50%;
+    background: radial-gradient(
+        circle,
+        rgba(212, 175, 55, .16),
+        transparent 70%
+    );
     opacity: 0;
-    transform: translateY(0) translateX(0) scale(0.5) rotate(0deg);
-  }
+    transition: .45s;
+}
 
-  25% {
+.progress-ring:hover::before {
     opacity: 1;
-  }
+}
 
-  70% {
-    opacity: 0.85;
-  }
+.progress-ring svg {
+    width: 138px;
+    height: 138px;
+    transform: rotate(-90deg);
+}
 
-  100% {
+.ring-bg {
+    fill: none;
+    stroke: rgba(212, 175, 55, .13);
+    stroke-width: 2;
+}
+
+.ring-progress {
+    fill: none;
+    stroke-width: 3;
+    stroke-linecap: round;
+    filter: drop-shadow(0 0 10px rgba(212, 175, 55, .55));
+}
+
+.ring-score {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-family: "Playfair Display", serif;
+    font-size: 1.9rem;
+    font-weight: 600;
+    color: #fff8e9;
+    letter-spacing: .5px;
+    text-shadow:
+        0 0 10px rgba(212, 175, 55, .45),
+        0 0 18px rgba(212, 175, 55, .25);
+}
+
+/* ==========================================================
+   RING PARTICLES
+========================================================== */
+
+.ring-particles {
+    position: absolute;
+    inset: 0;
+    overflow: visible;
+    pointer-events: none;
+    border-radius: 50%;
+}
+
+.particle {
+    position: absolute;
+    bottom: 26%;
+    width: 3px;
+    height: 3px;
+    border-radius: 50%;
     opacity: 0;
-    transform: translateY(-34px) translateX(6px) scale(1.05) rotate(12deg);
-  }
+    background: radial-gradient(circle, var(--gold-soft, #fff4b0), var(--gold, #d4af37));
+    box-shadow: 0 0 8px rgba(212, 175, 55, .8);
+    animation-name: goldFloat;
+    animation-play-state: paused;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-out;
 }
 
-.particle-2 {
-  --drift-x: -6px;
+.progress-ring:hover .particle,
+.lock-wrap:hover .particle {
+    animation-play-state: running;
 }
 
-/* ---------------------------------------------------------
-   LOCKED semester node — sealed achievement, chained
-   --------------------------------------------------------- */
-
-.cgpa-node-tooltip-anchor {
-  position: relative;
-  display: flex;
-  justify-content: center;
+@keyframes goldFloat {
+    0% {
+        opacity: 0;
+        transform: translateY(0) translateX(0) scale(.4);
+    }
+    20% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(-75px) translateX(15px) scale(.15);
+    }
 }
 
-.cgpa-node-locked {
-  opacity: 0.55;
-  transition: opacity 0.35s ease, filter 0.35s ease, transform 0.35s ease;
+/* ==========================================================
+   LOCKS (STRICT CIRCLE FIX)
+========================================================== */
+
+.lock-wrap {
+    position: relative;
+    width: 90px;
+    height: 90px;
+    min-width: 90px;
+    min-height: 90px;
+    border-radius: 50%;
+    aspect-ratio: 1 / 1;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    outline: none;
+    cursor: pointer;
 }
 
-.cgpa-node-locked:hover,
-.cgpa-node-locked:focus-visible {
-  opacity: 0.85;
-  transform: translateY(-3px);
+.lock-circle {
+    width: 90px;
+    height: 90px;
+    min-width: 90px;
+    min-height: 90px;
+    border-radius: 50%;
+    aspect-ratio: 1 / 1;
+    flex-shrink: 0;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    border: 1.6px solid rgba(212, 175, 55, .25);
+    background: rgba(255, 255, 255, .02);
+
+    position: relative;
+    overflow: hidden;
+    transition: .4s ease;
+    box-sizing: border-box;
+}
+
+.lock-wrap:hover .lock-circle {
+    border-color: var(--gold, #d4af37);
+    box-shadow:
+        0 0 20px rgba(212, 175, 55, .35),
+        inset 0 0 12px rgba(212, 175, 55, .12);
+    transform: translateY(-5px) scale(1.05);
 }
 
 .lock-icon {
-  position: relative;
-  width: 68px;
-  height: 68px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
-  background: linear-gradient(160deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0)),
-    var(--cgpa-bg-elevated);
-  border: 1px solid rgba(212, 175, 55, 0.28);
-  font-size: 1.3rem;
-  filter: grayscale(0.85);
-  backdrop-filter: blur(2px);
-  transition: box-shadow 0.35s ease, filter 0.35s ease;
+    display: flex;
+    color: rgba(255, 255, 255, .55);
+    transition: .35s;
 }
 
-.cgpa-node-locked:hover .lock-icon,
-.cgpa-node-locked:focus-visible .lock-icon {
-  filter: grayscale(0.35);
-  box-shadow: 0 0 18px rgba(212, 175, 55, 0.32);
+.lock-wrap:hover .lock-icon {
+    animation: lockShake .5s;
+    color: var(--gold-soft, #fff4b0);
 }
 
-/* faint chain ring wrapped around the seal */
-.chain-ring {
-  position: absolute;
-  inset: -6px;
-  border-radius: 50%;
-  pointer-events: none;
-  background:
-    repeating-conic-gradient(from 0deg,
-      rgba(212, 175, 55, 0.55) 0deg 6deg,
-      transparent 6deg 18deg);
-  -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 4px), #000 calc(100% - 3px), #000 100%, transparent 100%);
-  mask: radial-gradient(farthest-side, transparent calc(100% - 4px), #000 calc(100% - 3px), #000 100%, transparent 100%);
-  opacity: 0.55;
-  transition: transform 0.4s ease, opacity 0.4s ease;
+@keyframes lockShake {
+    20% { transform: rotate(-8deg); }
+    40% { transform: rotate(8deg); }
+    60% { transform: rotate(-5deg); }
+    80% { transform: rotate(5deg); }
 }
 
-.cgpa-node-locked:hover .chain-ring,
-.cgpa-node-locked:focus-visible .chain-ring {
-  opacity: 0.85;
-}
-
-.cgpa-node-locked.shaking .lock-icon {
-  animation: lock-shake 0.5s ease;
-}
-
-.cgpa-node-locked.shaking .chain-ring {
-  animation: chain-rattle 0.5s ease;
-}
-
-@keyframes lock-shake {
-
-  0%,
-  100% {
-    transform: translateX(0) rotate(0);
-  }
-
-  20% {
-    transform: translateX(-4px) rotate(-6deg);
-  }
-
-  40% {
-    transform: translateX(4px) rotate(6deg);
-  }
-
-  60% {
-    transform: translateX(-3px) rotate(-4deg);
-  }
-
-  80% {
-    transform: translateX(3px) rotate(4deg);
-  }
-}
-
-@keyframes chain-rattle {
-
-  0%,
-  100% {
-    transform: rotate(0deg);
-  }
-
-  25% {
-    transform: rotate(4deg);
-  }
-
-  50% {
-    transform: rotate(-4deg);
-  }
-
-  75% {
-    transform: rotate(3deg);
-  }
-}
-
-/* ---------------------------------------------------------
-   CGPA goal (trophy) node — the destination
-   --------------------------------------------------------- */
-
-.cgpa-node-goal.locked {
-  opacity: 0.5;
-}
-
-.cgpa-node-goal.unlocked {
-  opacity: 1;
-}
-
-.trophy-icon {
-  position: relative;
-  width: 78px;
-  height: 78px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
-  background: radial-gradient(circle, var(--cgpa-bg-elevated), var(--cgpa-bg));
-  border: 1px solid rgba(212, 175, 55, 0.35);
-  font-size: 1.7rem;
-  filter: grayscale(0.8);
-  transition: box-shadow 0.4s ease, transform 0.4s ease, filter 0.4s ease;
-}
-
-.cgpa-node-goal.unlocked .trophy-icon {
-  filter: none;
-  box-shadow: 0 0 26px rgba(212, 175, 55, 0.5);
-  animation: trophy-float 3.6s ease-in-out infinite;
-}
-
-.cgpa-node-goal.unlocked:hover .trophy-icon,
-.cgpa-node-goal.unlocked:focus-visible .trophy-icon {
-  transform: translateY(-6px) scale(1.08);
-  animation-play-state: paused;
-}
-
-@keyframes trophy-float {
-
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-
-  50% {
-    transform: translateY(-6px);
-  }
-}
-
-.trophy-glow {
-  position: absolute;
-  inset: -14px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(212, 175, 55, 0.35), transparent 70%);
-  opacity: 0;
-  transition: opacity 0.5s ease;
-  pointer-events: none;
-}
-
-.cgpa-node-goal.unlocked .trophy-glow {
-  opacity: 0.8;
-  animation: trophy-glow-pulse 3.6s ease-in-out infinite;
-}
-
-@keyframes trophy-glow-pulse {
-
-  0%,
-  100% {
-    opacity: 0.55;
-  }
-
-  50% {
-    opacity: 0.95;
-  }
-}
-
-.cgpa-node-goal.locked.shaking .trophy-icon {
-  animation: lock-shake 0.5s ease;
-}
-
-/* particles emitted only once unlocked */
-.trophy-particle {
-  position: absolute;
-  font-size: 0.7rem;
-  opacity: 0;
-  pointer-events: none;
-}
-
-.trophy-particle-1 {
-  top: 2px;
-  left: -14px;
-}
-
-.trophy-particle-2 {
-  top: -6px;
-  right: -10px;
-}
-
-.trophy-particle-3 {
-  bottom: 20px;
-  left: -20px;
-}
-
-.trophy-particle-4 {
-  bottom: 10px;
-  right: -18px;
-}
-
-.cgpa-node-goal.unlocked .trophy-particle {
-  animation: particle-drift 2.4s ease-out infinite;
-}
-
-.cgpa-node-goal.unlocked .trophy-particle-1 {
-  animation-delay: 0s;
-}
-
-.cgpa-node-goal.unlocked .trophy-particle-2 {
-  animation-delay: 0.6s;
-}
-
-.cgpa-node-goal.unlocked .trophy-particle-3 {
-  animation-delay: 1.2s;
-}
-
-.cgpa-node-goal.unlocked .trophy-particle-4 {
-  animation-delay: 1.8s;
-}
-
-/* ---------------------------------------------------------
-   Tooltip for locked nodes — glass, gold border, ornament
-   --------------------------------------------------------- */
-
-.cgpa-tooltip {
-  position: absolute;
-  bottom: calc(100% + 16px);
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 3px;
-  padding: 14px 20px 12px;
-  border-radius: 12px;
-  background: var(--cgpa-glass);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  border: 1px solid rgba(212, 175, 55, 0.4);
-  box-shadow: var(--cgpa-shadow), inset 0 1px 0 rgba(255, 255, 255, 0.06);
-  white-space: nowrap;
-  font-size: 0.78rem;
-  color: var(--cgpa-gold-soft);
-  z-index: 5;
-  animation: tooltip-pop 0.3s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.cgpa-tooltip strong {
-  font-family: var(--cgpa-display);
-  color: var(--cgpa-gold);
-  font-size: 0.88rem;
-  letter-spacing: 0.04em;
-}
-
-.cgpa-tooltip-ornament {
-  color: var(--cgpa-gold);
-  font-size: 0.6rem;
-  opacity: 0.75;
-  margin: 3px 0 1px;
-}
-
-.cgpa-tooltip-muted {
-  opacity: 0.6;
-  font-size: 0.7rem;
-  font-style: italic;
-  font-family: var(--cgpa-serif);
-}
-
-@keyframes tooltip-pop {
-  from {
+.lock-tooltip {
+    position: absolute;
+    bottom: calc(100% + 14px);
+    left: 50%;
+    transform: translateX(-50%) translateY(8px);
+    background: #111;
+    color: #f5f5f5;
+    border: 1px solid rgba(212, 175, 55, .25);
+    padding: 8px 14px;
+    border-radius: 8px;
+    white-space: nowrap;
     opacity: 0;
-    transform: translateX(-50%) translateY(8px) scale(0.96);
-  }
+    visibility: hidden;
+    transition: opacity .3s ease, transform .3s ease, visibility .3s;
+    font-size: .75rem;
+    letter-spacing: .5px;
+    pointer-events: none;
+    z-index: 10;
+}
 
-  to {
+.lock-wrap:hover .lock-tooltip,
+.lock-wrap:focus .lock-tooltip {
     opacity: 1;
-    transform: translateX(-50%) translateY(0) scale(1);
-  }
+    visibility: visible;
+    transform: translateX(-50%) translateY(0);
 }
 
-/* ---------------------------------------------------------
-   Popup — glassmorphism royal semester detail
-   --------------------------------------------------------- */
+/* ==========================================================
+   TIMELINE ITEMS
+========================================================== */
 
-.cgpa-popup-backdrop {
-  position: fixed;
-  inset: 0;
-  z-index: 99999;
-  left: 50%;
-  top: -340px;
-
-  transform: translateX(-50%);
-  width: 420px;
-
-  background: none;
-  backdrop-filter: none;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-
-  pointer-events: none;
-}
-
-@keyframes backdrop-fade {
-  from {
+.milestone {
+    position: relative;
+    display: flex;
+    align-items: center;
+    min-height: 190px;
     opacity: 0;
-  }
+    transform: translateY(40px);
+    transition: opacity .8s ease, transform .8s ease;
+}
 
-  to {
+.academic-path.show .milestone {
     opacity: 1;
-  }
+    transform: none;
 }
 
-.cgpa-popup {
-  position: relative;
-  width: min(400px, 100%);
-  padding: 44px 36px 36px;
-  border-radius: 22px;
-  text-align: center;
-  background: linear-gradient(180deg, rgba(26, 24, 27, 0.82), rgba(11, 11, 13, 0.9));
-  border: 1px solid rgba(212, 175, 55, 0.35);
-  box-shadow: var(--cgpa-shadow), inset 0 1px 0 rgba(255, 255, 255, 0.06), 0 0 60px rgba(212, 175, 55, 0.08);
-  animation: popup-spring 0.55s cubic-bezier(0.34, 1.56, 0.64, 1);
-  pointer-events: auto;
-  z-index: 100000;
+.milestone-node {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
 }
 
-.cgpa-popup::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  padding: 1px;
-  background: linear-gradient(160deg, rgba(212, 175, 55, 0.5), transparent 30%, transparent 70%, rgba(212, 175, 55, 0.35));
-  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
-  pointer-events: none;
+/* Gaps line behind nodes */
+.milestone-node::before {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 150px;
+    height: 150px;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    background: var(--bg, #090909);
+    z-index: -1;
 }
 
-@keyframes popup-spring {
-  0% {
-    opacity: 0;
-    transform: scale(0.85) translateY(24px);
-  }
-
-  100% {
-    opacity: 1;
-    transform: scale(1) translateY(0);
-  }
+.timeline-dot {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 10px;
+    height: 10px;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    background: var(--gold, #d4af37);
+    box-shadow: 0 0 14px rgba(212, 175, 55, .55);
+    z-index: 2;
 }
 
-.cgpa-popup-close {
-  position: absolute;
-  top: 16px;
-  right: 18px;
-  background: none;
-  border: none;
-  color: var(--cgpa-gold-soft);
-  font-size: 1.4rem;
-  line-height: 1;
-  cursor: pointer;
-  opacity: 0.7;
-  transition: opacity 0.25s ease, transform 0.25s ease;
+.final-dot {
+    background: var(--gold-soft, #fff4b0);
 }
 
-.cgpa-popup-close:hover {
-  opacity: 1;
-  transform: rotate(90deg);
+.milestone-info {
+    width: calc(50% - 90px);
 }
 
-.cgpa-popup-crown {
-  font-size: 1.5rem;
-  filter: drop-shadow(0 3px 8px rgba(212, 175, 55, 0.5));
-  animation: crown-float 3.4s ease-in-out infinite;
+.milestone.left .milestone-info {
+    margin-right: auto;
+    text-align: right;
 }
 
-.cgpa-popup-eyebrow {
-  margin-top: 8px;
-  font-family: var(--cgpa-display);
-  font-size: 0.82rem;
-  letter-spacing: 0.24em;
-  text-transform: uppercase;
-  color: var(--cgpa-gold-soft);
-  opacity: 0.8;
+.milestone.right .milestone-info {
+    margin-left: auto;
+    text-align: left;
 }
 
-.cgpa-popup-sgpa {
-  font-family: var(--cgpa-display);
-  font-size: clamp(3.4rem, 10vw, 4.2rem);
-  font-weight: 600;
-  color: var(--cgpa-gold);
-  line-height: 1;
-  margin: 14px 0 2px;
-  text-shadow: 0 0 30px rgba(212, 175, 55, 0.4);
+.milestone-info h3 {
+    font-family: "Playfair Display", serif;
+    color: #fff7df;
+    font-size: 1.18rem;
+    margin-bottom: 10px;
 }
 
-.cgpa-popup-sgpa-label {
-  font-family: var(--cgpa-serif);
-  font-style: italic;
-  font-size: 0.85rem;
-  color: var(--cgpa-gold-soft);
-  opacity: 0.7;
-  letter-spacing: 0.05em;
+.milestone-stats {
+    display: flex;
+    gap: 8px;
+    color: var(--gold-soft, #fff4b0);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: .78rem;
 }
 
-.cgpa-popup-stars {
-  display: flex;
-  justify-content: center;
-  gap: 7px;
-  margin: 14px 0 6px;
+.milestone.left .milestone-stats {
+    justify-content: flex-end;
 }
 
-.cgpa-star {
-  color: var(--cgpa-gold);
-  font-size: 1.15rem;
-  opacity: 0;
-  filter: drop-shadow(0 0 6px rgba(212, 175, 55, 0.5));
-  animation: star-pop 0.45s ease forwards;
+.separator {
+    opacity: .5;
 }
 
-@keyframes star-pop {
-  from {
-    opacity: 0;
-    transform: scale(0.4) rotate(-20deg);
-  }
-
-  to {
-    opacity: 1;
-    transform: scale(1) rotate(0);
-  }
+.milestone-remark {
+    margin-top: 14px;
+    font-style: italic;
+    color: rgba(255, 255, 255, .65);
+    line-height: 1.6;
+    max-width: 320px;
 }
 
-.cgpa-popup-divider {
-  position: relative;
-  width: 100%;
-  height: 1px;
-  margin: 22px 0 24px;
-  background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.5), transparent);
+.milestone.left .milestone-remark {
+    margin-left: auto;
 }
 
-.cgpa-popup-divider::before {
-  content: '\2726';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  color: var(--cgpa-gold);
-  font-size: 0.7rem;
-  background: linear-gradient(180deg, rgba(26, 24, 27, 1), rgba(11, 11, 13, 1));
-  padding: 0 10px;
+/* ==========================================================
+   FINAL BADGE
+========================================================== */
+
+.final-badge {
+    width: 108px;
+    height: 108px;
+    min-width: 108px;
+    min-height: 108px;
+    border-radius: 50%;
+    aspect-ratio: 1 / 1;
+    flex-shrink: 0;
+
+    border: 2px dashed rgba(212, 175, 55, .35);
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    color: rgba(255, 255, 255, .45);
+    transition: .45s;
+    box-sizing: border-box;
 }
 
-/* mini progress ring — decorative, reflects the same % as the node ring */
-.cgpa-popup-ring-wrap {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 24px;
+.final-title {
+    font-size: .7rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 6px;
 }
 
-.cgpa-popup-ring {
-  position: relative;
-  width: 84px;
-  height: 84px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background:
-    radial-gradient(circle, var(--cgpa-bg-elevated) 62%, transparent 63%),
-    conic-gradient(var(--cgpa-gold) calc(var(--cgpa-progress, 0) * 1%), rgba(212, 175, 55, 0.15) 0);
-  box-shadow: 0 0 18px rgba(212, 175, 55, 0.25);
+.final-score {
+    font-family: "Playfair Display", serif;
+    font-size: 1.35rem;
 }
 
-.cgpa-popup-ring span {
-  font-family: var(--cgpa-display);
-  font-size: 0.95rem;
-  color: var(--cgpa-gold-soft);
+.final-badge.unlocked {
+    border: 2px solid var(--gold, #d4af37);
+    color: #fff7df;
+    background: radial-gradient(
+        circle,
+        rgba(212, 175, 55, .18),
+        transparent 75%
+    );
+    box-shadow: 0 0 26px rgba(212, 175, 55, .45);
 }
 
-.cgpa-popup-stats {
-  display: flex;
-  justify-content: center;
-  gap: 44px;
-  padding: 0 0 24px;
-  border-bottom: 1px solid rgba(212, 175, 55, 0.15);
+.final-badge:hover {
+    transform: translateY(-6px) scale(1.05);
 }
 
-.cgpa-popup-value {
-  font-family: var(--cgpa-display);
-  font-size: 1.7rem;
-  font-weight: 600;
-  color: var(--cgpa-gold-soft);
+/* ==========================================================
+   RESPONSIVE
+========================================================== */
+
+@media(max-width: 850px) {
+    .academic-path {
+        max-width: 520px;
+    }
+
+    .milestone {
+        flex-direction: column;
+        text-align: center;
+        padding-bottom: 60px;
+    }
+
+    .milestone-node {
+        position: relative;
+        left: auto;
+        transform: none;
+        margin-bottom: 24px;
+    }
+
+    .milestone-info {
+        width: 100%;
+        margin: 0 !important;
+        text-align: center !important;
+    }
+
+    .milestone-stats {
+        justify-content: center !important;
+    }
+
+    .milestone-remark {
+        margin: auto !important;
+    }
+
+    .progress-ring,
+    .progress-ring svg {
+        width: 112px;
+        height: 112px;
+        min-width: 112px;
+        min-height: 112px;
+    }
+
+    .ring-score {
+        font-size: 1.6rem;
+    }
+
+    .milestone-node::before {
+        width: 120px;
+        height: 120px;
+    }
 }
 
-.cgpa-popup-label {
-  margin-top: 5px;
-  font-size: 0.68rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  opacity: 0.6;
-}
+@media(max-width: 500px) {
+    .cgpa-section {
+        padding: 70px 0 100px;
+    }
 
-.cgpa-popup-remark {
-  margin-top: 22px;
-  font-family: var(--cgpa-serif);
-  font-size: 1.05rem;
-  font-style: italic;
-  letter-spacing: 0.02em;
-  color: var(--cgpa-gold-soft);
-}
+    .academic-path::before {
+        left: 50%;
+    }
 
-/* ---------------------------------------------------------
-   Reduced motion
-   --------------------------------------------------------- */
+    .milestone {
+        min-height: 170px;
+    }
 
-@media (prefers-reduced-motion: reduce) {
+    .milestone-info h3 {
+        font-size: 1rem;
+    }
 
-  .cgpa-path,
-  .cgpa-path::before,
-  .cgpa-path::after,
-  .ring-fill,
-  .progress-ring,
-  .ring-rotator,
-  .cgpa-crown,
-  .particle,
-  .cgpa-tooltip,
-  .cgpa-popup,
-  .cgpa-star,
-  .trophy-icon,
-  .trophy-glow,
-  .trophy-particle,
-  .chain-ring,
-  .cgpa-section::before {
-    animation: none !important;
-    transition: none !important;
-  }
-}
-
-/* ---------------------------------------------------------
-   Responsive
-   --------------------------------------------------------- */
-
-@media (max-width: 900px) {
-  .cgpa-track {
-    gap: 44px;
-  }
-}
-
-@media (max-width: 600px) {
-  .cgpa-scroll {
-    padding: 64px 0 32px;
-  }
-
-  .cgpa-track {
-    gap: 34px;
-    justify-content: flex-start;
-    padding: 0 20px;
-  }
-
-  .cgpa-node {
-    width: 88px;
-  }
-
-  .cgpa-node-current {
-    width: 104px;
-  }
-
-  .progress-ring,
-  .ring-glow {
-    width: 100px;
-    height: 100px;
-  }
-
-  .ring-rotator {
-    width: 114px;
-    height: 114px;
-  }
-
-  .cgpa-crown {
-    top: -30px;
-    font-size: 1.5rem;
-  }
-
-  .lock-icon {
-    width: 56px;
-    height: 56px;
-  }
-
-  .trophy-icon {
-    width: 64px;
-    height: 64px;
-  }
-
-  .cgpa-popup {
-    padding: 36px 24px 28px;
-  }
-
-  .cgpa-popup-sgpa {
-    font-size: 3rem;
-  }
-
-  .cgpa-section::before {
-    opacity: 0.3;
-  }
+    .milestone-remark {
+        font-size: .95rem;
+    }
 }

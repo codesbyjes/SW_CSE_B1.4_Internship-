@@ -7,7 +7,6 @@ const MILESTONES = [
   { text: 'Built my first project: Jes Quotes' },
   { text: 'Participated in hackathons' },
   { text: 'Worked on impactful projects and gained hands on experience' },
-  
   { text: 'Started Web Development — HTML → CSS → JavaScript' },
   { text: 'Started React' },
   { text: 'Currently learning Full Stack Development' },
@@ -39,7 +38,7 @@ function Timeline() {
           {MILESTONES.map((item, index) => (
             <li
               className={`timeline-item ${index % 2 === 0 ? "left" : "right"}`}
-              key={item.text}
+              key={index}
               style={{ transitionDelay: `${index * 0.12}s` }}
             >
               <span className="timeline-dot"></span>

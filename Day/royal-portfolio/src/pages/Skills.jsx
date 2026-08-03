@@ -1,8 +1,6 @@
-import SkillCard from '../components/SkillCard/SkillCard.jsx'
-
-// Note: a dedicated Skills page wasn't in the exact folder list you
-// sent, but the brief's nav bar and Skills-page spec both need one,
-// so it was added here alongside the other pages/*.jsx files.
+import SkillCard from '../components/SkillCard/SkillCard.jsx';
+import GitHubStats from "../components/GitHubStats/GitHubStats";
+import Timeline from "../components/Timeline/Timeline";
 
 const SKILL_CATEGORIES = [
   {
@@ -37,24 +35,36 @@ const SKILL_CATEGORIES = [
       { name: 'Full Stack Development', level: 20 },
     ],
   },
-]
+];
 
 function Skills() {
   return (
-    <section className="skills-page section">
+    <section className="skills-page section compact-top">
+      <div className="github-stats-wrapper">
+        <GitHubStats />
+      </div>
+
       <div className="page-container">
         <span className="section-eyebrow">Capabilities</span>
+
         <h2 className="section-title">Skills</h2>
+
         <div className="gold-divider"></div>
 
         <div className="skills-grid-page">
           {SKILL_CATEGORIES.map((cat) => (
-            <SkillCard key={cat.category} category={cat.category} skills={cat.skills} />
+            <SkillCard
+              key={cat.category}
+              category={cat.category}
+              skills={cat.skills}
+            />
           ))}
         </div>
+
+        <Timeline />
       </div>
     </section>
-  )
+  );
 }
 
-export default Skills
+export default Skills;
