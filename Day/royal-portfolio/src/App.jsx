@@ -11,6 +11,7 @@ import Contact from './pages/Contact.jsx'
 import './App.css'
 import Resume from "./components/Resume/Resume.jsx";
 
+
 // This app uses simple React state to switch "pages" instead of
 // React Router. That keeps things beginner-friendly for now -
 // React Router can be added later (see section 22 of the brief)
