@@ -7,11 +7,13 @@ function Footer({ onNavigate }) {
     <footer className="site-footer">
       <div className="page-container footer-inner">
         <div className="footer-brand">
-          <img
-            className="footer-logo"
-            src="/logo.svg"
-            alt="JI logo"
-          />
+          <div className="footer-logo-wrap">
+            <img
+              className="footer-logo"
+              src="/logo.png"
+              alt="JI logo"
+            />
+          </div>
           <p>Jeslene Iniya D</p>
         </div>
 
@@ -20,9 +22,7 @@ function Footer({ onNavigate }) {
           <button onClick={() => onNavigate('about')}>About</button>
           <button onClick={() => onNavigate('skills')}>Skills</button>
           <button onClick={() => onNavigate('projects')}>Projects</button>
-          <button onClick={() => onNavigate('resume')}>
-            Resume
-          </button>
+          <button onClick={() => onNavigate('resume')}>Resume</button>
           <button onClick={() => onNavigate('contact')}>Contact</button>
         </nav>
 

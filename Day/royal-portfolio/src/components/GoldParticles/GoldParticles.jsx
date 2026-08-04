@@ -1,20 +1,35 @@
 import { useMemo } from 'react'
 import './GoldParticles.css'
 
-// Generates a fixed set of "sparks" that float upward and fade out,
-// like gold dust evaporating. We build the random values once with
-// useMemo so they don't reshuffle and jump around on every re-render.
+// Generates 140 layered sparks distributed across the viewport (0-100%),
+// with slightly increased sizes for better ambient visibility.
 function GoldParticles() {
   const particles = useMemo(() => {
-    const count = 28
-    return Array.from({ length: count }, (_, i) => ({
-      id: i,
-      left: Math.random() * 100,        // horizontal position, in %
-      size: 2 + Math.random() * 3,      // px
-      delay: Math.random() * 10,        // seconds
-      duration: 8 + Math.random() * 10, // seconds
-      drift: (Math.random() - 0.5) * 60 // slight left/right sway, px
-    }))
+    return Array.from({ length: 140 }, (_, i) => {
+      // Layer distribution: 90 tiny, 35 medium glow, 15 large blurred
+      let layer = 'layer-tiny'
+      let size = 2 + Math.random() * 2
+
+      if (i >= 90 && i < 125) {
+        layer = 'layer-glow'
+        size = 4 + Math.random() * 3
+      } else if (i >= 125) {
+        layer = 'layer-large'
+        size = 6 + Math.random() * 4
+      }
+
+      return {
+        id: i,
+        left: Math.random() * 100, // horizontal position (%)
+        top: Math.random() * 100, // vertical position across full screen (0-100%)
+        size,
+        layer,
+        delay: Math.random() * 15, // staggered animation timing (s)
+        duration: 12 + Math.random() * 10, // 12s - 22s for smooth visible motion
+        drift: (Math.random() - 0.5) * 60, // sway distance (px)
+        direction: Math.random() > 0.5 ? 1 : -1, // randomized left/right drift multiplier
+      }
+    })
   }, [])
 
   return (
@@ -22,14 +37,16 @@ function GoldParticles() {
       {particles.map((p) => (
         <span
           key={p.id}
-          className="spark"
+          className={`spark ${p.layer}`}
           style={{
             left: `${p.left}%`,
+            top: `${p.top}%`,
             width: `${p.size}px`,
             height: `${p.size}px`,
             animationDelay: `${p.delay}s`,
             animationDuration: `${p.duration}s`,
-            '--drift': `${p.drift}px`
+            '--drift': `${p.drift}px`,
+            '--dir': p.direction,
           }}
         />
       ))}

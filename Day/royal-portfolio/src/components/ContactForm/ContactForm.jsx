@@ -1,44 +1,73 @@
-import { useState } from 'react'
-import './ContactForm.css'
+import { useRef } from "react";
+import emailjs from "@emailjs/browser";
+import "./ContactForm.css";
 
-// Frontend-only for now, as requested - no backend is wired up yet.
-// "submitted" just lets us show a friendly confirmation message.
 function ContactForm() {
-  const [form, setForm] = useState({ name: '', email: '', message: '' })
-  const [submitted, setSubmitted] = useState(false)
+  const form = useRef();
 
-  function handleChange(e) {
-    const { name, value } = e.target
-    setForm((prev) => ({ ...prev, [name]: value }))
-  }
+  const sendEmail = (e) => {
+    e.preventDefault();
 
-  function handleSubmit(e) {
-    e.preventDefault()
-    setSubmitted(true)
-  }
+    emailjs
+      .sendForm(
+        "service_m7yhp4b",
+        "template_52bjx9k",
+        form.current,
+        {
+          publicKey: "a9LwHdIvpru5yB5hJ",
+        }
+      )
+      .then(
+        () => {
+          alert("Message sent successfully! 🎉");
+          form.current.reset();
+        },
+        (error) => {
+          console.log("EmailJS Error:", error);
+          alert("Failed to send message.");
+        }
+      );
+  };
 
   return (
-    <form className="royal-card contact-form" onSubmit={handleSubmit}>
+    <form ref={form} onSubmit={sendEmail} className="contact-form">
+
       <div className="form-field">
-        <label htmlFor="name">Name</label>
-        <input type="text" id="name" name="name" value={form.name} onChange={handleChange} required />
+        <label>Name</label>
+        <input
+          type="text"
+          name="user_name"
+          placeholder="Enter your name"
+          required
+        />
       </div>
 
       <div className="form-field">
-        <label htmlFor="email">Email</label>
-        <input type="email" id="email" name="email" value={form.email} onChange={handleChange} required />
+        <label>Email</label>
+        <input
+          type="email"
+          name="user_email"
+          placeholder="Enter your email"
+          required
+        />
       </div>
 
       <div className="form-field">
-        <label htmlFor="message">Message</label>
-        <textarea id="message" name="message" rows="5" value={form.message} onChange={handleChange} required></textarea>
+        <label>Message</label>
+        <textarea
+          name="message"
+          placeholder="Write your message..."
+          rows="5"
+          required
+        ></textarea>
       </div>
 
-      <button type="submit" className="btn btn-primary">Send Message</button>
+      <button type="submit" className="btn">
+        Send Message
+      </button>
 
-      {submitted && <p className="form-success">Thank you — your message has been noted!</p>}
     </form>
-  )
+  );
 }
 
-export default ContactForm
+export default ContactForm;

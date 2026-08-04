@@ -8,41 +8,64 @@
 
 .spark {
   position: absolute;
-  bottom: -10px;
+  top: 0;
   border-radius: 50%;
-  background: radial-gradient(circle, var(--gold-soft), var(--gold) 60%, transparent 70%);
-  box-shadow: 0 0 6px 1px var(--gold);
-  opacity: 0;
-  animation-name: floatUp;
-  animation-timing-function: ease-in;
+  background: radial-gradient(circle, var(--ls-gold-soft, #f3dd9c) 0%, var(--ls-gold, #d4af37) 70%, transparent 100%);
+  animation-name: ambientDrift;
+  animation-timing-function: ease-in-out;
   animation-iteration-count: infinite;
+  will-change: transform, opacity;
 }
 
-/* Sparks are a little more visible in dark mode, since they're the
-   whole point of the luxury effect there; kept subtle in light mode
-   so they don't look like dust on a bright ivory background */
+/* Layer 1: 90 Tiny Particles */
+.spark.layer-tiny {
+  opacity: 0.4;
+  box-shadow: 0 0 5px rgba(212, 175, 55, 0.35);
+}
+
+/* Layer 2: 35 Medium Glowing Particles */
+.spark.layer-glow {
+  opacity: 0.75;
+  box-shadow: 0 0 12px 2px rgba(243, 221, 156, 0.75);
+}
+
+/* Layer 3: 15 Large Blurred Ambient Particles */
+.spark.layer-large {
+  opacity: 0.6;
+  filter: blur(2px);
+  box-shadow: 0 0 18px 5px rgba(212, 175, 55, 0.5);
+}
+
+/* Light theme adaptation */
 :root[data-theme='light'] .spark {
-  opacity: 0;
-  filter: brightness(0.9);
+  filter: brightness(0.85);
 }
 
-@keyframes floatUp {
+/* Dynamic full-screen upward drift with randomized directional sway */
+@keyframes ambientDrift {
   0% {
-    transform: translate(0, 0);
+    transform: translate(0, 0) scale(0.8) rotate(0deg);
     opacity: 0;
   }
-  10% {
-    opacity: 0.85;
+  15% {
+    opacity: 0.6;
   }
-  80% {
-    opacity: 0.4;
+  40% {
+    opacity: 0.35;
+    transform: translate(calc(var(--drift) * var(--dir) * 0.35), -35vh) scale(1);
+  }
+  70% {
+    opacity: 0.8;
+    transform: translate(calc(var(--drift) * var(--dir) * 0.7), -70vh) rotate(90deg);
   }
   100% {
-    transform: translate(var(--drift), -105vh);
+    transform: translate(calc(var(--drift) * var(--dir)), -130vh) scale(0.65) rotate(180deg);
     opacity: 0;
   }
 }
 
 @media (max-width: 640px) {
-  .gold-particles { display: none; }
+  .gold-particles {
+    display: none;
+  }
 }

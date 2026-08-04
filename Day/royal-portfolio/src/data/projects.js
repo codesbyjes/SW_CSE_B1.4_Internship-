@@ -4,12 +4,9 @@
 //
 // coverImage: shown on the Projects grid card.
 // detailImage: shown as the full-width hero banner on the detail page.
-// isVideo + detailVideo: for projects where the detail page should show
-// a video player instead of an image (set isVideo: true and provide
-// detailVideo; detailImage is ignored for that project).
-// Point image/video paths at files in /public/projects/ once you have
+// Point image paths at files in /public/projects/ once you have
 // them. Until a file exists, the card/detail page automatically shows
-// an elegant gold placeholder instead of a broken image or video.
+// an elegant gold placeholder instead of a broken image.
 
 const projects = [
   {
@@ -17,8 +14,8 @@ const projects = [
     title: 'Jes Quotes',
     category: 'Web Application',
     coverImage: '/projects/jesquotes-cover.png',
-    isVideo: true,
-    detailVideo: '/projects/jesquotes-detail.mp4',
+    detailImage: '/projects/jesquotes-detail.png',
+    isVideo: false,
     description:
       'My first project, created out of curiosity. A motivational quote application built using Python and Streamlit that surfaces meaningful quotes for users.',
     techStack: ['Python', 'Streamlit'],
@@ -29,13 +26,13 @@ const projects = [
     liveDemo: 'https://jes-quotes-app-clean-vr8zzubxmfl3lx6cxm2pgz.streamlit.app/',
   },
   {
-    id: 'medonco-nexus',
+    id: 'medionco-nexus',
     title: 'MediOnco Nexus',
     category: 'Machine Learning',
-    coverImage: '/projects/medonco-cover.png',
-    detailImage: '/projects/medonco-detail.png',
+    coverImage: '/projects/medionco-cover.png',
+    detailImage: '/projects/medionco-detail.png',
     description:
-      'Predicts a patient\u2019s cancer risk level using machine learning, helping prioritize the clinical workflow by identifying high-risk cases first.',
+      "Predicts a patient's cancer risk level using machine learning, helping prioritize the clinical workflow by identifying high-risk cases first.",
     techStack: ['Python', 'Machine Learning'],
     status: 'In Progress',
     role: 'Team Member',
@@ -64,10 +61,10 @@ const projects = [
     title: 'EduPro',
     category: 'Concept',
     coverImage: '/projects/edupro-cover.png',
-    isVideo: true,
-    detailVideo: '/projects/edupro-detail.mp4',
+    detailImage: '/projects/edupro-detail.png',
+    isVideo: false,
     description:
-      'Details coming soon — this space is reserved for EduPro\u2019s description, tech stack and images once the project is finalized.',
+      "Details coming soon — this space is reserved for EduPro's description, tech stack and images once the project is finalized.",
     techStack: [],
     status: 'Concept',
     role: '',

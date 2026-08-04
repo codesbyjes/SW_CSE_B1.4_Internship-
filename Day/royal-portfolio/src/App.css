@@ -3,6 +3,20 @@
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  /* Seamless background unveil: starts slightly scaled up with zero blur tint */
+  animation: siteCinematicReveal 1.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  will-change: transform, opacity;
+}
+
+@keyframes siteCinematicReveal {
+  0% {
+    opacity: 0;
+    transform: scale(1.015);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 
 .app-main {
@@ -151,7 +165,7 @@
 
 /* 1. Generous, luxury top spacing below the navbar */
 .skills-page {
-  padding-top: 60px !important; /* Bump up to 70px or 80px if you want even more room */
+  padding-top: 60px !important;
 }
 
 /* 2. Reset wrapper margin */
@@ -165,4 +179,21 @@
 .github-stats-section {
   margin-top: 0 !important;
   padding-top: 0 !important;
+}
+/* 7. Website entrance setup */
+.app-shell {
+  opacity: 0;
+  transform: translateY(25px);
+  filter: blur(10px);
+  transition:
+    opacity 1.2s ease,
+    transform 1.2s ease,
+    filter 1.2s ease;
+  will-change: opacity, transform, filter;
+}
+
+.app-shell.is-revealed {
+  opacity: 1;
+  transform: translateY(0);
+  filter: blur(0);
 }
